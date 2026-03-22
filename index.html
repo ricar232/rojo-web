@@ -1,0 +1,839 @@
+<!DOCTYPE html>
+<html lang="es" class="dark scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Pycrafted – Páginas web profesionales, ultra responsivas y con animaciones premium 2026. Diseño personalizado para emprendedores y empresas." />
+  <meta name="keywords" content="diseño web, páginas web, desarrollo web, e-commerce, SEO, landing pages, glassmorphism, animaciones, Orlando, Florida, España, Latinoamérica" />
+  <meta name="author" content="Pycrafted" />
+  <meta property="og:title" content="Pycrafted – Diseño Web 2026" />
+  <meta property="og:description" content="Tu negocio merece una web que convierte. Diseños premium, ultra responsivos y con animaciones de nivel mundial." />
+  <meta property="og:type" content="website" />
+  <title>Pycrafted – Diseño Web Profesional 2026</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- GSAP + ScrollTrigger + TextPlugin -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/TextPlugin.min.js"></script>
+
+  <!-- Tailwind Config -->
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: { sans: ['Inter', 'system-ui', 'sans-serif'] },
+          colors: {
+            accent: '#00FF9D',
+            cyan:   '#00BFFF',
+            dark:   '#0A0A0A',
+            card:   'rgba(255,255,255,0.05)',
+          },
+          backdropBlur: { glass: '16px' },
+        }
+      }
+    }
+  </script>
+
+  <link rel="stylesheet" href="css/styles.css" />
+<script type="module" src="https://unpkg.com/@splinetool/viewer@1.9.5/build/spline-viewer.js"></script>
+</head>
+<body class="antialiased">
+
+<!-- ============================================================
+     NAVBAR
+============================================================ -->
+<nav id="navbar" role="navigation" aria-label="Navegación principal">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex items-center justify-between h-16 lg:h-20">
+
+      <!-- Logo -->
+      <a href="#inicio" class="flex items-center gap-2 flex-shrink-0" aria-label="Pycrafted inicio">
+        <div class="w-8 h-8 rounded-lg flex items-center justify-center" style="background:linear-gradient(135deg,var(--accent),var(--cyan))">
+          <svg class="w-5 h-5 text-black" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
+            <path d="M3 4a1 1 0 011-1h12a1 1 0 011 1v2a1 1 0 01-.293.707L13 10.414V17a1 1 0 01-1.447.894l-4-2A1 1 0 017 15V10.414L3.293 6.707A1 1 0 013 6V4z"/>
+          </svg>
+        </div>
+        <span class="font-black text-xl tracking-tight">
+          Py<span class="gradient-text">crafted</span>
+        </span>
+      </a>
+
+      <!-- Desktop Nav Links -->
+      <div class="hidden lg:flex items-center gap-8">
+        <a href="#inicio"    class="nav-link text-sm" data-i18n="nav.home">Inicio</a>
+        <a href="#servicios" class="nav-link text-sm" data-i18n="nav.services">Servicios</a>
+
+        <a href="#proceso"   class="nav-link text-sm" data-i18n="nav.process">Proceso</a>
+        <a href="#sobre-mi"  class="nav-link text-sm" data-i18n="nav.about">Sobre mí</a>
+        <a href="#contacto"  class="nav-link text-sm" data-i18n="nav.contact">Contacto</a>
+      </div>
+
+      <!-- Right controls -->
+      <div class="hidden lg:flex items-center gap-4">
+        <!-- Dark/Light toggle -->
+        <a href="#contacto" class="btn-primary text-sm px-5 py-2.5">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/>
+          </svg>
+          <span data-i18n="nav.cta">Solicitar Presupuesto</span>
+        </a>
+      </div>
+
+      <!-- Mobile controls -->
+      <div class="flex lg:hidden items-center gap-3">
+        
+        <button id="hamburger" class="hamburger flex flex-col gap-1.5 p-2 z-[110]" aria-label="Abrir menú" aria-expanded="false">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+
+    </div>
+  </div>
+</nav>
+
+<!-- Mobile Menu -->
+<div id="mobile-menu" role="dialog" aria-modal="true" aria-label="Menú de navegación">
+  <a href="#inicio"    class="mobile-link" data-i18n="nav.home">Inicio</a>
+  <a href="#servicios" class="mobile-link" data-i18n="nav.services">Servicios</a>
+
+  <a href="#proceso"   class="mobile-link" data-i18n="nav.process">Proceso</a>
+  <a href="#sobre-mi"  class="mobile-link" data-i18n="nav.about">Sobre mí</a>
+  <a href="#contacto"  class="mobile-link" data-i18n="nav.contact">Contacto</a>
+  <a href="#contacto" class="btn-primary mt-4"><span data-i18n="nav.cta">Solicitar Presupuesto</span></a>
+</div>
+
+
+<!-- ============================================================
+     HERO + 3D
+============================================================ -->
+<section id="inicio" class="relative w-full h-screen min-h-[800px] flex mx-auto items-center justify-center overflow-hidden hero-grid">
+  <!-- Background Elements -->
+  <canvas id="particles-canvas" class="absolute inset-0 pointer-events-none z-[1]" aria-hidden="true"></canvas>
+  <div class="orb orb-1 absolute w-[600px] h-[600px] rounded-full blur-[120px] pointer-events-none z-[0] bg-[rgba(0,255,157,0.12)] -top-[200px] -right-[200px]" aria-hidden="true"></div>
+  <div class="orb orb-2 absolute w-[500px] h-[500px] rounded-full blur-[120px] pointer-events-none z-[0] bg-[rgba(0,191,255,0.10)] -bottom-[200px] -left-[150px]" aria-hidden="true"></div>
+  <div class="absolute inset-0 bg-gradient-to-b from-transparent via-black/20 to-black/80 z-[2] pointer-events-none" aria-hidden="true"></div>
+
+  <!-- Content Container -->
+  <div class="relative z-[10] w-full max-w-7xl mx-auto px-4 sm:px-6 h-full flex flex-col lg:flex-row items-center justify-center lg:justify-between gap-12 pt-20">
+    
+    <!-- Text Content (Left) -->
+    <div class="flex-1 flex flex-col items-center lg:items-start text-center lg:text-left">
+      <div class="hero-badge inline-flex items-center gap-2 glass rounded-full px-5 py-2 text-sm font-semibold mb-8 border border-[rgba(0,255,157,0.3)] shadow-[0_0_15px_rgba(0,255,157,0.15)]" data-i18n="hero.badge">
+        <span class="w-2.5 h-2.5 rounded-full bg-[var(--accent)] animate-pulse inline-block shadow-[0_0_8px_var(--accent)]"></span>
+        Disponible para proyectos 2026
+      </div>
+
+      <h1 class="hero-title text-5xl sm:text-6xl lg:text-7xl xl:text-8xl font-black leading-[1.1] tracking-tighter mb-6 relative">
+        <span data-i18n="hero.title1">Páginas web que</span><br/>
+        <span class="gradient-text inline-block min-w-[280px]" id="typing-target">convierten</span><span class="typing-cursor" id="typing-cursor" aria-hidden="true"></span><br/>
+        <span class="text-white" data-i18n="hero.title2" style="text-shadow: 0 4px 20px rgba(0,0,0,0.5);">en 2026</span>
+      </h1>
+
+      <p class="hero-subtitle text-lg sm:text-xl text-gray-300 max-w-lg mb-10 leading-relaxed font-medium">
+        <span data-i18n="hero.subtitle1">Diseños profesionales, ultra responsivos, con animaciones premium y glassmorphism.</span><br class="hidden sm:block mt-2"/>
+        <strong class="text-white font-bold tracking-wide" data-i18n="hero.subtitle2">Tu negocio merece lo mejor.</strong>
+      </p>
+
+      <div class="hero-ctas flex flex-col sm:flex-row gap-5 w-full sm:w-auto">
+        <a href="#servicios" class="btn-glass text-base px-8 py-3.5 flex items-center justify-center">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"/></svg>
+          <span data-i18n="hero.btn.work">Ver Servicios</span>
+        </a>
+        <a href="#contacto" class="btn-primary text-base px-8 py-3.5 flex items-center justify-center">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/></svg>
+          <span data-i18n="hero.btn.contact">Hablemos de tu proyecto</span>
+        </a>
+      </div>
+    </div>
+
+    <!-- 3D CSS Phone (Right) -->
+    <div id="hero-3d-container" class="flex-1 relative w-full aspect-[4/5] max-h-[600px] flex items-center justify-center z-10 hidden sm:flex cursor-crosshair" style="perspective: 1200px;">
+      
+      <!-- Subtle glow behind the 3D model -->
+      <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[90%] h-[90%] bg-gradient-to-tr from-[var(--accent)] to-[var(--cyan)] rounded-full blur-[100px] opacity-20 pointer-events-none z-0"></div>
+
+      <!-- The 3D CSS Phone Wrapper -->
+      <div id="phone-3d-wrapper" class="relative z-10 w-[280px] h-[580px] lg:w-[320px] lg:h-[660px]" style="transform-style: preserve-3d; transition: transform 0.1s ease-out; transform: rotateY(-18deg) rotateX(8deg);">
+        
+        <!-- ================= BACK COVER & TITANIUM FRAME ================= -->
+        <div class="absolute inset-0 rounded-[48px] bg-[linear-gradient(135deg,#1f1f21,#0c0c0d)]" style="transform: translateZ(-16px); box-shadow: 0 30px 60px rgba(0,0,0,0.8), inset 0 0 0 1px rgba(255,255,255,0.05);"></div>
+        
+        <!-- Depth edges (Titanium look) -->
+        <div class="absolute inset-0 rounded-[48px] border-[16px] border-transparent" style="transform: translateZ(-8px); box-shadow: inset 0 0 0 2px #444, inset 0 0 15px rgba(255,255,255,0.1); background: linear-gradient(180deg, #3a3b3e 0%, #151618 100%); -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0); -webkit-mask-composite: xor; mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0); mask-composite: exclude;"></div>
+
+        <!-- Hardware Buttons -->
+        <!-- Mute -->
+        <div class="absolute -left-[4px] top-[120px] w-[4px] h-[25px] bg-gradient-to-r from-[#555] to-[#222] rounded-l-sm" style="transform: translateZ(-8px);"></div>
+        <!-- Vol Up -->
+        <div class="absolute -left-[4px] top-[160px] w-[4px] h-[55px] bg-gradient-to-r from-[#555] to-[#222] rounded-l-sm" style="transform: translateZ(-8px);"></div>
+        <!-- Vol Down -->
+        <div class="absolute -left-[4px] top-[230px] w-[4px] h-[55px] bg-gradient-to-r from-[#555] to-[#222] rounded-l-sm" style="transform: translateZ(-8px);"></div>
+        <!-- Power -->
+        <div class="absolute -right-[4px] top-[180px] w-[4px] h-[80px] bg-gradient-to-l from-[#555] to-[#222] rounded-r-sm" style="transform: translateZ(-8px);"></div>
+
+        <!-- ================= FRONT GLASS & SCREEN ================= -->
+        <div class="absolute inset-0 rounded-[48px] bg-black" style="transform: translateZ(0); box-shadow: inset 0 0 0 4px #1a1a1c, inset 0 0 0 5px #000, 0 0 30px rgba(0,255,157,0.15); border: 2px solid #2a2a2c; overflow: hidden; transform-style: preserve-3d;">
+          
+          <!-- Screen Edge Bezels -->
+          <div class="absolute inset-[10px] rounded-[38px] bg-[#050505] overflow-hidden">
+            
+            <!-- Animated UI Background -->
+            <div class="absolute inset-0 p-4 pt-12 text-white">
+              
+              <!-- Screen Wallpaper -->
+              <div class="absolute inset-0 object-cover opacity-30 mix-blend-screen" style="background: radial-gradient(circle at 50% 0%, rgba(0,255,157,0.4) 0%, transparent 60%), radial-gradient(circle at 100% 100%, rgba(0,191,255,0.4) 0%, transparent 50%);"></div>
+
+              <!-- Top Status Bar -->
+              <div class="absolute top-4 left-6 right-6 flex justify-between items-center text-[10px] font-bold tracking-wider z-20">
+                <span>9:41</span>
+                <div class="flex gap-1 items-center">
+                  <!-- Signal -->
+                  <div class="flex items-end gap-[1px] h-[10px]">
+                    <div class="w-[2px] h-[4px] bg-white rounded-sm"></div>
+                    <div class="w-[2px] h-[6px] bg-white rounded-sm"></div>
+                    <div class="w-[2px] h-[8px] bg-white rounded-sm"></div>
+                    <div class="w-[2px] h-[10px] bg-white rounded-sm"></div>
+                  </div>
+                  <!-- Wifi -->
+                  <svg class="w-3 h-3" fill="currentColor" viewBox="0 0 24 24"><path d="M12 21c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm0-4.5c-2.5 0-4.8-1-6.5-2.6l1.4-1.4c1.4 1.3 3.2 2 5.1 2s3.7-.7 5.1-2l1.4 1.4c-1.7 1.6-4 2.6-6.5 2.6zm0-4.5c-4.9 0-9.4 2-12.7 5.2l1.4 1.4C3.6 15.6 7.6 14 12 14s8.4 1.6 11.3 4.6l1.4-1.4c-3.3-3.2-7.8-5.2-12.7-5.2zm0-4.5C5.8 7.5 0 12.1 0 12.1l1.4 1.4C2.1 12.6 7.4 8.5 12 8.5s9.9 4.1 10.6 4.9l1.4-1.4C24 12.1 18.2 7.5 12 7.5z"/></svg>
+                  <!-- Battery -->
+                  <div class="w-5 h-[10px] border border-white/80 rounded-sm p-[1px] flex relative">
+                    <div class="bg-white h-full w-[80%] rounded-[1px]"></div>
+                    <div class="absolute -right-[2px] top-1/2 -translate-y-1/2 w-[2px] h-[4px] bg-white/50 rounded-r-sm"></div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Main Dashboard UI -->
+              <div class="relative z-10 w-full h-full flex flex-col gap-4 mt-4">
+                
+                <!-- Greeting Card -->
+                <div class="w-full bg-white/[0.03] border border-white/10 rounded-3xl p-4 backdrop-blur-md shadow-lg">
+                  <div class="flex justify-between items-center mb-4">
+                    <div class="flex items-center gap-3">
+                      <div class="w-10 h-10 rounded-full bg-gradient-to-tr from-[var(--accent)] to-[var(--cyan)] flex items-center justify-center p-[2px]">
+                        <img src="https://picsum.photos/seed/profilepic/100/100" class="w-full h-full rounded-full object-cover"/>
+                      </div>
+                      <div>
+                        <p class="text-[10px] text-gray-400 font-semibold uppercase tracking-wider" data-i18n="phone.welcome">Welcome back</p>
+                        <p class="text-sm font-bold truncate max-w-[120px]" data-i18n="phone.role">Pycrafted CEO</p>
+                      </div>
+                    </div>
+                  </div>
+                  <h3 class="text-[28px] font-black tracking-tight leading-none mb-1 text-[var(--accent)]">$124,500<span class="text-sm text-white/50">.00</span></h3>
+                  <p class="text-xs text-[var(--cyan)] font-semibold flex items-center gap-1">
+                    <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 10l7-7m0 0l7 7m-7-7v18"/></svg>
+                    <span data-i18n="phone.thismonth">+14.5% this month</span>
+                  </p>
+                </div>
+
+                <!-- Stats Grid -->
+                <div class="grid grid-cols-2 gap-3">
+                  <div class="bg-white/[0.03] border border-white/10 rounded-3xl p-4 flex flex-col justify-between h-28 backdrop-blur-md">
+                    <div class="w-8 h-8 rounded-full bg-[var(--accent)]/20 flex items-center justify-center text-[var(--accent)]">
+                      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg>
+                    </div>
+                    <div>
+                      <p class="text-[10px] text-gray-400 font-semibold mb-0.5" data-i18n="phone.traffic">Traffic</p>
+                      <p class="text-lg font-bold">45.2K</p>
+                    </div>
+                  </div>
+                  <div class="bg-white/[0.03] border border-white/10 rounded-3xl p-4 flex flex-col justify-between h-28 backdrop-blur-md">
+                    <div class="w-8 h-8 rounded-full bg-[var(--cyan)]/20 flex items-center justify-center text-[var(--cyan)]">
+                      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"/></svg>
+                    </div>
+                    <div>
+                      <p class="text-[10px] text-gray-400 font-semibold mb-0.5" data-i18n="phone.conversion">Conversion</p>
+                      <p class="text-lg font-bold">8.4%</p>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Wave Chart -->
+                <div class="flex-1 bg-white/[0.03] border border-white/10 rounded-3xl p-4 backdrop-blur-md relative overflow-hidden flex flex-col">
+                  <p class="text-[10px] text-gray-400 font-semibold mb-2" data-i18n="phone.activity">Activity Overview</p>
+                  <div class="flex items-end gap-1.5 h-full w-full mt-auto relative z-10">
+                    <div class="w-1/6 bg-[var(--accent)] rounded-t-sm opacity-40 h-[30%] hover:opacity-100 transition-opacity"></div>
+                    <div class="w-1/6 bg-[var(--accent)] rounded-t-sm opacity-50 h-[45%] hover:opacity-100 transition-opacity"></div>
+                    <div class="w-1/6 bg-[var(--accent)] rounded-t-sm opacity-60 h-[35%] hover:opacity-100 transition-opacity"></div>
+                    <div class="w-1/6 bg-[var(--accent)] rounded-t-sm opacity-80 h-[70%] hover:opacity-100 transition-opacity"></div>
+                    <div class="w-1/6 bg-[var(--accent)] rounded-t-sm opacity-90 h-[50%] hover:opacity-100 transition-opacity"></div>
+                    <div class="w-1/6 bg-gradient-to-t from-[var(--accent)] to-[var(--cyan)] rounded-t-sm h-[90%] shadow-[0_0_15px_var(--cyan)] relative">
+                      <div class="absolute -top-3 left-1/2 -translate-x-1/2 text-[9px] font-bold text-white bg-black/50 px-1.5 py-0.5 rounded" data-i18n="phone.new">NEW</div>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+
+            </div>
+          </div>
+          
+          <!-- Dynamic Island (Ultra-realistic) -->
+          <div class="absolute top-3 left-1/2 -translate-x-1/2 w-[90px] h-[26px] lg:w-[100px] lg:h-[30px] bg-black rounded-full z-20 flex justify-between items-center px-2 py-1 shadow-[0_5px_15px_rgba(0,0,0,0.8)] border border-white/5">
+            <!-- Camera lens -->
+            <div class="w-[14px] h-[14px] rounded-full bg-[#111] border border-white/10 flex items-center justify-center relative overflow-hidden shadow-[inset_0_2px_4px_rgba(0,0,0,0.8)]">
+               <div class="w-2 h-2 rounded-full bg-gradient-to-br from-[#1b2b4e] to-[#04091a]"></div>
+               <div class="absolute top-[2px] left-[3px] w-1 h-1 rounded-full bg-white/20 blur-[1px]"></div>
+            </div>
+            <!-- Privacy Indicator -->
+            <div class="w-1.5 h-1.5 rounded-full bg-[var(--accent)] shadow-[0_0_6px_var(--accent)] opacity-80 animate-pulse"></div>
+          </div>
+
+          <!-- Glossy Screen Reflection -->
+          <div class="absolute inset-[10px] rounded-[38px] z-30 pointer-events-none" style="background: linear-gradient(110deg, rgba(255,255,255,0.4) 0%, rgba(255,255,255,0.05) 20%, transparent 40%, transparent 100%); border-top: 1px solid rgba(255,255,255,0.3); border-left: 1px solid rgba(255,255,255,0.1); mix-blend-mode: overlay;"></div>
+
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Scroll Indicator (Bottom Center) -->
+  <div class="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 opacity-60 z-10 hidden lg:flex hover:opacity-100 transition-opacity">
+    <span class="text-[10px] font-bold tracking-[0.2em] uppercase text-white/50" data-i18n="hero.scroll">Scroll</span>
+    <div class="scroll-indicator" aria-hidden="true" style="border-color: rgba(255,255,255,0.15);"></div>
+  </div>
+</section>
+
+
+
+<!-- ============================================================
+     SERVICIOS
+============================================================ -->
+<section id="servicios" class="relative py-24 lg:py-32 overflow-hidden">
+  <div class="orb orb-1 opacity-50" aria-hidden="true" style="top:auto;bottom:-200px;right:-200px;"></div>
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <!-- Heading -->
+    <div class="text-center mb-16">
+      <div class="section-tag" data-i18n="nav.services" data-i18n="services.tag">Servicios</div>
+      <h2 class="text-4xl sm:text-5xl font-black tracking-tight mb-4">
+        <span data-i18n="services.title1">Todo lo que necesitas</span><br/><span class="gradient-text"><span data-i18n="services.title2">para brillar online</span></span>
+      </h2>
+      <p class="text-gray-400 max-w-xl mx-auto" data-i18n="services.desc">Ofrezco soluciones completas de diseño y desarrollo web, pensadas para generar resultados reales para tu negocio.</p>
+    </div>
+
+    <!-- Services Grid -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+
+      <!-- Card 1 -->
+      <article class="service-card group cursor-pointer" onclick="openServiceModal('services.card1')" aria-label="Diseño Web Personalizado">
+        <div class="w-12 h-12 rounded-xl flex items-center justify-center mb-5 transition-transform duration-300 group-hover:scale-110 group-hover:rotate-3" style="background:rgba(0,255,157,0.12);border:1px solid rgba(0,255,157,0.2);">
+          <svg class="w-6 h-6 text-[var(--accent)]" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+        </div>
+        <h3 class="text-xl font-bold mb-2" data-i18n="services.card1.title">Diseño Web Personalizado</h3>
+        <p class="text-gray-400 text-sm leading-relaxed mb-4" data-i18n="services.card1.desc">Sitios únicos, pensados para tu marca, 100% responsivos y optimizados para la conversión. Sin plantillas genéricas.</p>
+        <button class="text-[var(--accent)] text-sm font-semibold flex items-center gap-1 group-hover:gap-2 transition-all"><span data-i18n="services.learnmore">Saber más</span> <span aria-hidden="true">→</span></button>
+      </article>
+
+      <!-- Card 2 -->
+      <article class="service-card group cursor-pointer" onclick="openServiceModal('services.card2')" aria-label="Tiendas Online E-commerce">
+        <div class="w-12 h-12 rounded-xl flex items-center justify-center mb-5 transition-transform duration-300 group-hover:scale-110 group-hover:rotate-3" style="background:rgba(0,191,255,0.12);border:1px solid rgba(0,191,255,0.2);">
+          <svg class="w-6 h-6 text-[var(--cyan)]" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/></svg>
+        </div>
+        <h3 class="text-xl font-bold mb-2" data-i18n="services.card2.title">Tiendas Online (E-commerce)</h3>
+        <p class="text-gray-400 text-sm leading-relaxed mb-4" data-i18n="services.card2.desc">Vende 24/7 con una tienda online rápida, segura y fácil de gestionar. Integración de pagos, catálogos y más.</p>
+        <button class="text-[var(--cyan)] text-sm font-semibold flex items-center gap-1 group-hover:gap-2 transition-all"><span data-i18n="services.learnmore">Saber más</span> <span aria-hidden="true">→</span></button>
+      </article>
+
+      <!-- Card 3 -->
+      <article class="service-card group cursor-pointer" onclick="openServiceModal('services.card3')" aria-label="SEO y Optimización">
+        <div class="w-12 h-12 rounded-xl flex items-center justify-center mb-5 transition-transform duration-300 group-hover:scale-110 group-hover:rotate-3" style="background:rgba(0,255,157,0.12);border:1px solid rgba(0,255,157,0.2);">
+          <svg class="w-6 h-6 text-[var(--accent)]" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"/></svg>
+        </div>
+        <h3 class="text-xl font-bold mb-2" data-i18n="services.card3.title">SEO + Optimización</h3>
+        <p class="text-gray-400 text-sm leading-relaxed mb-4" data-i18n="services.card3.desc">Posiciónate en Google y atrae tráfico orgánico de calidad. Optimización técnica, velocidad y contenido estratégico.</p>
+        <button class="text-[var(--accent)] text-sm font-semibold flex items-center gap-1 group-hover:gap-2 transition-all"><span data-i18n="services.learnmore">Saber más</span> <span aria-hidden="true">→</span></button>
+      </article>
+
+      <!-- Card 4 -->
+      <article class="service-card group cursor-pointer" onclick="openServiceModal('services.card4')" aria-label="Landing Pages de Alto Conversión">
+        <div class="w-12 h-12 rounded-xl flex items-center justify-center mb-5 transition-transform duration-300 group-hover:scale-110 group-hover:rotate-3" style="background:rgba(0,191,255,0.12);border:1px solid rgba(0,191,255,0.2);">
+          <svg class="w-6 h-6 text-[var(--cyan)]" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>
+        </div>
+        <h3 class="text-xl font-bold mb-2" data-i18n="services.card4.title">Landing Pages de Alta Conversión</h3>
+        <p class="text-gray-400 text-sm leading-relaxed mb-4" data-i18n="services.card4.desc">Páginas de aterrizaje diseñadas para convertir visitantes en clientes. Copywriting, CRO y A/B testing incluidos.</p>
+        <button class="text-[var(--cyan)] text-sm font-semibold flex items-center gap-1 group-hover:gap-2 transition-all"><span data-i18n="services.learnmore">Saber más</span> <span aria-hidden="true">→</span></button>
+      </article>
+
+      <!-- Card 5 -->
+      <article class="service-card group cursor-pointer" onclick="openServiceModal('services.card5')" aria-label="Mantenimiento y Soporte">
+        <div class="w-12 h-12 rounded-xl flex items-center justify-center mb-5 transition-transform duration-300 group-hover:scale-110 group-hover:rotate-3" style="background:rgba(0,255,157,0.12);border:1px solid rgba(0,255,157,0.2);">
+          <svg class="w-6 h-6 text-[var(--accent)]" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+        </div>
+        <h3 class="text-xl font-bold mb-2" data-i18n="services.card5.title">Mantenimiento y Soporte</h3>
+        <p class="text-gray-400 text-sm leading-relaxed mb-4" data-i18n="services.card5.desc">Tu web siempre actualizada, segura y funcionando al 100%. Soporte prioritario, backups y monitoreo continuo.</p>
+        <button class="text-[var(--accent)] text-sm font-semibold flex items-center gap-1 group-hover:gap-2 transition-all"><span data-i18n="services.learnmore">Saber más</span> <span aria-hidden="true">→</span></button>
+      </article>
+
+      <!-- Card 6 -->
+      <article class="service-card group cursor-pointer" onclick="openServiceModal('services.card6')" aria-label="Web Apps Personalizadas">
+        <div class="w-12 h-12 rounded-xl flex items-center justify-center mb-5 transition-transform duration-300 group-hover:scale-110 group-hover:rotate-3" style="background:rgba(0,191,255,0.12);border:1px solid rgba(0,191,255,0.2);">
+          <svg class="w-6 h-6 text-[var(--cyan)]" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"/></svg>
+        </div>
+        <h3 class="text-xl font-bold mb-2" data-i18n="services.card6.title">Web Apps Personalizadas</h3>
+        <p class="text-gray-400 text-sm leading-relaxed mb-4" data-i18n="services.card6.desc">Aplicaciones web a medida con funcionalidades avanzadas: dashboards, portales, integraciones API y automatizaciones.</p>
+        <button class="text-[var(--cyan)] text-sm font-semibold flex items-center gap-1 group-hover:gap-2 transition-all"><span data-i18n="services.learnmore">Saber más</span> <span aria-hidden="true">→</span></button>
+      </article>
+
+    </div><!-- /grid -->
+  </div>
+</section>
+
+
+
+
+<!-- ============================================================
+     SOBRE MÍ
+============================================================ -->
+<section id="sobre-mi" class="py-24 lg:py-32 overflow-hidden">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+
+      <!-- Left: Image & badges -->
+      <div class="flex flex-col items-center lg:items-start">
+        <div class="relative mb-8">
+          <div class="w-56 h-56 rounded-full overflow-hidden" style="border:3px solid var(--accent);box-shadow:0 0 40px rgba(0,255,157,0.25);">
+            <img src="https://picsum.photos/seed/profile/400/400" alt="Foto profesional del diseñador web" class="w-full h-full object-cover" loading="lazy"/>
+          </div>
+          <!-- Badge disponible -->
+          <div class="absolute -bottom-3 left-1/2 -translate-x-1/2 glass rounded-full px-4 py-1.5 text-sm font-semibold whitespace-nowrap flex items-center gap-2">
+            <span class="w-2 h-2 bg-[var(--accent)] rounded-full animate-pulse"></span>
+            <span data-i18n="about.badge">Disponible ahora</span>
+          </div>
+        </div>
+
+        <!-- Tools logos -->
+        <div class="mt-6">
+          <p class="text-gray-500 text-xs uppercase tracking-widest mb-4 text-center lg:text-left" data-i18n="about.tools">Herramientas que domino</p>
+          <div class="flex gap-4 flex-wrap justify-center lg:justify-start">
+            <div class="glass rounded-xl px-4 py-2 text-sm font-semibold" title="Tailwind CSS">⚡ Tailwind</div>
+            <div class="glass rounded-xl px-4 py-2 text-sm font-semibold" title="GSAP">🎬 GSAP</div>
+            <div class="glass rounded-xl px-4 py-2 text-sm font-semibold" title="Framer">🎨 Framer</div>
+            <div class="glass rounded-xl px-4 py-2 text-sm font-semibold" title="Webflow">🌐 Webflow</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right: Bio & skills -->
+      <div>
+        <div class="section-tag" data-i18n="about.tag">Sobre mí</div>
+        <h2 class="text-4xl sm:text-5xl font-black tracking-tight mt-2 mb-5">
+          <span data-i18n="about.title1">Más de </span><span class="gradient-text"><span data-i18n="about.title_years">5 años</span></span> <span data-i18n="about.title2">creando sitios que generan resultados reales</span>
+        </h2>
+        <p class="text-gray-400 leading-relaxed mb-3" data-i18n="about.p1_full">
+          Soy un diseñador y desarrollador web freelance apasionado por crear experiencias digitales que no solo se ven increíbles, sino que también <strong class="text-white">convierten visitantes en clientes</strong>.
+        </p>
+        <p class="text-gray-400 leading-relaxed mb-8" data-i18n="about.p2_full">
+          He trabajado con más de <strong class="text-white">80 clientes</strong> en España, Latinoamérica y EEUU, desde startups hasta empresas consolidadas. Mi enfoque combina diseño de vanguardia con estrategia de negocio.
+        </p>
+
+        <!-- Skills -->
+        <div class="space-y-5">
+          <div>
+            <div class="flex justify-between mb-2"><span class="text-sm font-semibold" data-i18n="about.skill1">Diseño UI/UX</span><span class="text-sm text-[var(--accent)] font-bold">95%</span></div>
+            <div class="h-1.5 bg-white/10 rounded-full overflow-hidden"><div class="skill-bar-fill" data-width="95"></div></div>
+          </div>
+          <div>
+            <div class="flex justify-between mb-2"><span class="text-sm font-semibold" data-i18n="about.skill2">Desarrollo Frontend</span><span class="text-sm text-[var(--accent)] font-bold">90%</span></div>
+            <div class="h-1.5 bg-white/10 rounded-full overflow-hidden"><div class="skill-bar-fill" data-width="90"></div></div>
+          </div>
+          <div>
+            <div class="flex justify-between mb-2"><span class="text-sm font-semibold" data-i18n="about.skill3">SEO & Performance</span><span class="text-sm text-[var(--accent)] font-bold">85%</span></div>
+            <div class="h-1.5 bg-white/10 rounded-full overflow-hidden"><div class="skill-bar-fill" data-width="85"></div></div>
+          </div>
+          <div>
+            <div class="flex justify-between mb-2"><span class="text-sm font-semibold" data-i18n="about.skill4">E-commerce & CRO</span><span class="text-sm text-[var(--accent)] font-bold">88%</span></div>
+            <div class="h-1.5 bg-white/10 rounded-full overflow-hidden"><div class="skill-bar-fill" data-width="88"></div></div>
+          </div>
+        </div>
+
+        <!-- Stats -->
+        <div class="grid grid-cols-3 gap-4 mt-10">
+          <div class="text-center">
+            <p class="text-3xl font-black gradient-text">80+</p>
+            <p class="text-gray-500 text-xs mt-1" data-i18n="about.stat1">Proyectos</p>
+          </div>
+          <div class="text-center">
+            <p class="text-3xl font-black gradient-text">98%</p>
+            <p class="text-gray-500 text-xs mt-1" data-i18n="about.stat2">Satisfacción</p>
+          </div>
+          <div class="text-center">
+            <p class="text-3xl font-black gradient-text">5★</p>
+            <p class="text-gray-500 text-xs mt-1" data-i18n="about.stat3">Valoración</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     PROCESO
+============================================================ -->
+<section id="proceso" class="py-24 lg:py-32 overflow-hidden" style="background:rgba(255,255,255,0.02);">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center mb-16">
+      <div class="section-tag" data-i18n="nav.process" data-i18n="process.tag">Proceso</div>
+      <h2 class="text-4xl sm:text-5xl font-black tracking-tight mb-4">
+        <span data-i18n="process.title1">Mi proceso </span><span class="gradient-text"><span data-i18n="process.title2">paso a paso</span></span>
+      </h2>
+      <p class="text-gray-400 max-w-xl mx-auto" data-i18n="process.desc">Un flujo de trabajo transparente y colaborativo, pensado para que siempre sepas en qué punto estamos.</p>
+    </div>
+
+    <!-- Steps -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-8">
+
+      <div class="process-step text-center flex flex-col items-center">
+        <div class="w-16 h-16 rounded-2xl flex items-center justify-center mb-4 transition-transform duration-300 hover:scale-110" style="background:linear-gradient(135deg,rgba(0,255,157,0.2),rgba(0,191,255,0.1));border:1px solid rgba(0,255,157,0.3);">
+          <span class="text-2xl" aria-hidden="true">🔍</span>
+        </div>
+        <span class="text-xs font-black text-[var(--accent)] tracking-widest mb-2">01</span>
+        <h3 class="font-bold text-base mb-2" data-i18n="process.s1.title">Descubrimiento</h3>
+        <p class="text-gray-500 text-sm leading-relaxed" data-i18n="process.s1.desc">Entendemos tu negocio, objetivos y audiencia objetivo para definir la estrategia ideal.</p>
+      </div>
+
+      <div class="process-step text-center flex flex-col items-center">
+        <div class="w-16 h-16 rounded-2xl flex items-center justify-center mb-4 transition-transform duration-300 hover:scale-110" style="background:linear-gradient(135deg,rgba(0,191,255,0.2),rgba(0,255,157,0.1));border:1px solid rgba(0,191,255,0.3);">
+          <span class="text-2xl" aria-hidden="true">🎨</span>
+        </div>
+        <span class="text-xs font-black text-[var(--cyan)] tracking-widest mb-2">02</span>
+        <h3 class="font-bold text-base mb-2" data-i18n="process.s2.title">Diseño</h3>
+        <p class="text-gray-500 text-sm leading-relaxed" data-i18n="process.s2.desc">Prototipo interactivo en Figma con tu feedback en tiempo real hasta la aprobación.</p>
+      </div>
+
+      <div class="process-step text-center flex flex-col items-center">
+        <div class="w-16 h-16 rounded-2xl flex items-center justify-center mb-4 transition-transform duration-300 hover:scale-110" style="background:linear-gradient(135deg,rgba(0,255,157,0.2),rgba(0,191,255,0.1));border:1px solid rgba(0,255,157,0.3);">
+          <span class="text-2xl" aria-hidden="true">⚙️</span>
+        </div>
+        <span class="text-xs font-black text-[var(--accent)] tracking-widest mb-2">03</span>
+        <h3 class="font-bold text-base mb-2" data-i18n="process.s3.title">Desarrollo</h3>
+        <p class="text-gray-500 text-sm leading-relaxed" data-i18n="process.s3.desc">Código limpio, rápido y accesible. Animaciones, integraciones y funcionalidades a medida.</p>
+      </div>
+
+      <div class="process-step text-center flex flex-col items-center">
+        <div class="w-16 h-16 rounded-2xl flex items-center justify-center mb-4 transition-transform duration-300 hover:scale-110" style="background:linear-gradient(135deg,rgba(0,191,255,0.2),rgba(0,255,157,0.1));border:1px solid rgba(0,191,255,0.3);">
+          <span class="text-2xl" aria-hidden="true">✅</span>
+        </div>
+        <span class="text-xs font-black text-[var(--cyan)] tracking-widest mb-2">04</span>
+        <h3 class="font-bold text-base mb-2" data-i18n="process.s4.title">Pruebas</h3>
+        <p class="text-gray-500 text-sm leading-relaxed" data-i18n="process.s4.desc">QA exhaustivo: cross-browser, mobile, performance (Lighthouse 95+) y accesibilidad.</p>
+      </div>
+
+      <div class="process-step text-center flex flex-col items-center">
+        <div class="w-16 h-16 rounded-2xl flex items-center justify-center mb-4 transition-transform duration-300 hover:scale-110" style="background:linear-gradient(135deg,rgba(0,255,157,0.2),rgba(0,191,255,0.1));border:1px solid rgba(0,255,157,0.3);">
+          <span class="text-2xl" aria-hidden="true">🚀</span>
+        </div>
+        <span class="text-xs font-black text-[var(--accent)] tracking-widest mb-2">05</span>
+        <h3 class="font-bold text-base mb-2" data-i18n="process.s5.title">Lanzamiento</h3>
+        <p class="text-gray-500 text-sm leading-relaxed" data-i18n="process.s5.desc">Deploy seguro + soporte post-lanzamiento, formación y mantenimiento continuo.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     TESTIMONIOS
+============================================================ -->
+<section id="testimonios" class="py-24 lg:py-32 overflow-hidden">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center mb-14">
+      <div class="section-tag" data-i18n="test.tag">Testimonios</div>
+      <h2 class="text-4xl sm:text-5xl font-black tracking-tight mb-4">
+        <span data-i18n="test.title1">Lo que dicen </span><span class="gradient-text"><span data-i18n="test.title2">mis clientes</span></span>
+      </h2>
+    </div>
+
+    <div class="relative overflow-hidden">
+      <div id="testimonials-track" class="testimonials-track">
+
+        <div class="service-card flex-shrink-0 w-80 md:w-96">
+          <div class="flex items-center gap-3 mb-4">
+            <img src="https://picsum.photos/seed/t1/80/80" alt="Foto de Ana García" class="w-12 h-12 rounded-full object-cover" loading="lazy"/>
+            <div>
+              <p class="font-bold text-sm">Ana García</p>
+              <p class="text-gray-500 text-xs">CEO, Boutique Élite · Madrid</p>
+            </div>
+          </div>
+          <div class="stars flex gap-0.5 mb-3" aria-label="5 estrellas">
+            <span aria-hidden="true">★★★★★</span>
+          </div>
+          <p class="text-gray-400 text-sm leading-relaxed italic" data-i18n="test.t1.desc">"Gracias a Pycrafted, nuestras ventas online se triplicaron en 3 meses. El diseño es espectacular y la web carga en menos de 1 segundo. ¡Absolutamente recomendable!"</p>
+        </div>
+
+        <div class="service-card flex-shrink-0 w-80 md:w-96">
+          <div class="flex items-center gap-3 mb-4">
+            <img src="https://picsum.photos/seed/t2/80/80" alt="Foto de Carlos Mendoza" class="w-12 h-12 rounded-full object-cover" loading="lazy"/>
+            <div>
+              <p class="font-bold text-sm">Carlos Mendoza</p>
+              <p class="text-gray-500 text-xs">Co-fundador, TechStart CDMX</p>
+            </div>
+          </div>
+          <div class="stars flex gap-0.5 mb-3" aria-label="5 estrellas">
+            <span aria-hidden="true">★★★★★</span>
+          </div>
+          <p class="text-gray-400 text-sm leading-relaxed italic" data-i18n="test.t2.desc">"Necesitaba un sitio que transmitiera innovación y confianza. El resultado superó todas mis expectativas. Profesional, puntual y con un ojo increíble para el detalle."</p>
+        </div>
+
+        <div class="service-card flex-shrink-0 w-80 md:w-96">
+          <div class="flex items-center gap-3 mb-4">
+            <img src="https://picsum.photos/seed/t3/80/80" alt="Foto de María José Ruiz" class="w-12 h-12 rounded-full object-cover" loading="lazy"/>
+            <div>
+              <p class="font-bold text-sm">María José Ruiz</p>
+              <p class="text-gray-500 text-xs">Directora, Consultoría MJR · BCN</p>
+            </div>
+          </div>
+          <div class="stars flex gap-0.5 mb-3" aria-label="5 estrellas">
+            <span aria-hidden="true">★★★★★</span>
+          </div>
+          <p class="text-gray-400 text-sm leading-relaxed italic" data-i18n="test.t3.desc">"Mi landing page convierte al 19%. Nunca pensé que una web pudiera tener tanto impacto en mi negocio. El proceso fue claro, colaborativo y muy ágil."</p>
+        </div>
+
+        <div class="service-card flex-shrink-0 w-80 md:w-96">
+          <div class="flex items-center gap-3 mb-4">
+            <img src="https://picsum.photos/seed/t4/80/80" alt="Foto de Roberto Vargas" class="w-12 h-12 rounded-full object-cover" loading="lazy"/>
+            <div>
+              <p class="font-bold text-sm">Roberto Vargas</p>
+              <p class="text-gray-500 text-xs">Fundador, Gourmet.pe · Lima</p>
+            </div>
+          </div>
+          <div class="stars flex gap-0.5 mb-3" aria-label="5 estrellas">
+            <span aria-hidden="true">★★★★★</span>
+          </div>
+          <p class="text-gray-400 text-sm leading-relaxed italic" data-i18n="test.t4.desc">"La atención al cliente es excepcional. Entregaron en tiempo y forma, con un resultado que nuestros clientes adoran. 100% volveré a trabajar con ellos."</p>
+        </div>
+
+      </div>
+
+      <!-- Carousel Controls -->
+      <div class="flex flex-col items-center gap-6 mt-12">
+        <div class="flex gap-3">
+          <button id="prev-test" class="w-12 h-12 rounded-full glass flex items-center justify-center hover:border-[var(--accent)] transition-colors" aria-label="Testimonio anterior">←</button>
+          <button id="next-test" class="w-12 h-12 rounded-full glass flex items-center justify-center hover:border-[var(--accent)] transition-colors" aria-label="Siguiente testimonio">→</button>
+        </div>
+        <a href="https://www.instagram.com/richardmotatorres/" target="_blank" rel="noopener noreferrer" class="btn-glass flex items-center gap-2 px-6 py-3 text-sm">
+          <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+          <span data-i18n="test.view_more">Ver más reseñas en Instagram</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Portfolio Modal -->
+
+
+<!-- Service Modal -->
+<div id="service-modal" class="fixed inset-0 z-[200] hidden items-center justify-center p-4 bg-black/80 backdrop-blur-sm" role="dialog" aria-modal="true" onclick="closeServiceModal(event)">
+  <div class="glass rounded-2xl max-w-2xl w-full p-8 relative overflow-hidden" id="service-modal-content" onclick="event.stopPropagation()">
+    <!-- Decoration -->
+    <div class="absolute -top-24 -right-24 w-48 h-48 bg-[var(--accent)]/10 rounded-full blur-[60px]"></div>
+    
+    <button onclick="closeServiceModalDirect()" class="absolute top-4 right-4 w-10 h-10 rounded-full flex items-center justify-center glass text-gray-400 hover:text-white transition-colors z-10" aria-label="Cerrar modal">✕</button>
+    
+    <div class="relative z-10">
+      <div id="service-modal-icon" class="w-16 h-16 rounded-2xl flex items-center justify-center mb-6" style="background:rgba(0,255,157,0.12);border:1px solid rgba(0,255,157,0.2);">
+        <!-- Icon will be injected by JS -->
+      </div>
+      
+      <h2 id="service-modal-title" class="text-3xl font-black mb-4"></h2>
+      <p id="service-modal-desc" class="text-gray-400 mb-8 leading-relaxed text-lg"></p>
+      
+      <div class="mb-8">
+        <p class="text-xs font-bold uppercase tracking-widest text-[var(--accent)] mb-4" data-i18n="services.modal.features">Características clave</p>
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+          <div class="glass rounded-xl p-4 border-white/5 flex flex-col gap-2">
+            <div class="w-2 h-2 rounded-full bg-[var(--accent)]"></div>
+            <p id="service-f1" class="text-sm font-bold text-white"></p>
+          </div>
+          <div class="glass rounded-xl p-4 border-white/5 flex flex-col gap-2">
+            <div class="w-2 h-2 rounded-full bg-[var(--cyan)]"></div>
+            <p id="service-f2" class="text-sm font-bold text-white"></p>
+          </div>
+          <div class="glass rounded-xl p-4 border-white/5 flex flex-col gap-2">
+            <div class="w-2 h-2 rounded-full bg-[var(--accent)]"></div>
+            <p id="service-f3" class="text-sm font-bold text-white"></p>
+          </div>
+        </div>
+      </div>
+      
+      <button class="btn-primary w-full justify-center py-4 text-lg" onclick="scrollToContact();closeServiceModalDirect()" data-i18n="services.modal.cta">Consultar presupuesto</button>
+    </div>
+  </div>
+</div>
+
+<section id="cta-final" class="py-24 lg:py-32 relative overflow-hidden">
+  <div class="absolute inset-0" style="background:linear-gradient(135deg,rgba(0,255,157,0.08),rgba(0,191,255,0.08));"></div>
+  <div class="absolute inset-0" style="border-top:1px solid rgba(0,255,157,0.15);border-bottom:1px solid rgba(0,191,255,0.15);"></div>
+  <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
+    <div class="section-tag" data-i18n="cta.tag">¿Listo?</div>
+    <h2 class="text-4xl sm:text-5xl lg:text-6xl font-black tracking-tight mt-4 mb-6 leading-tight">
+      <span data-i18n="cta.title1">Listo para tener la web de tus sueños</span> <span class="gradient-text" data-i18n="cta.title2">en 2026</span>
+    </h2>
+    <p class="text-gray-400 text-lg mb-10 max-w-2xl mx-auto" data-i18n="cta.desc">No dejes que tu competencia te supere online. Hablemos de tu proyecto hoy y construyamos algo extraordinario juntos.</p>
+    <div class="flex flex-col sm:flex-row gap-4 justify-center">
+      <a href="#contacto" class="btn-primary text-lg px-8 py-4">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+        <span data-i18n="cta.btn1">Empecemos ahora</span>
+      </a>
+      <a href="https://wa.me/13528143988" target="_blank" rel="noopener noreferrer" class="btn-glass text-lg px-8 py-4">
+        <svg class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        <span data-i18n="cta.btn2">WhatsApp directo</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     CONTACTO
+============================================================ -->
+<section id="contacto" class="py-24 lg:py-32 overflow-hidden">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center mb-14">
+      <div class="section-tag" data-i18n="contact.tag">Contacto</div>
+      <h2 class="text-4xl sm:text-5xl font-black tracking-tight mb-4"><span data-i18n="contact.title1">Hablemos de tu </span><span class="gradient-text" data-i18n="contact.title2">proyecto</span></h2>
+      <p class="text-gray-400 max-w-lg mx-auto" data-i18n="contact.desc">Cuéntame qué necesitas y te envío una propuesta personalizada en menos de 24 horas.</p>
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-5 gap-12">
+      <!-- Contact Info -->
+      <div class="lg:col-span-2 space-y-6">
+        <div class="glass rounded-2xl p-6 flex items-start gap-4">
+          <div class="w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0" style="background:rgba(0,255,157,0.12);">
+            <svg class="w-5 h-5 text-[var(--accent)]" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+          </div>
+          <div>
+            <p class="font-semibold text-sm mb-1">Email</p>
+            <a href="mailto:ricar233@proton.me" class="text-gray-400 text-sm hover:text-[var(--accent)] transition-colors">ricar233@proton.me</a>
+          </div>
+        </div>
+        <div class="glass rounded-2xl p-6 flex items-start gap-4">
+          <div class="w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0" style="background:rgba(0,191,255,0.12);">
+            <svg class="w-5 h-5 text-[var(--cyan)]" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>
+          </div>
+          <div>
+            <p class="font-semibold text-sm mb-1" data-i18n="contact.info.phone">Teléfono / WhatsApp</p>
+            <a href="tel:+13528143988" class="text-gray-400 text-sm hover:text-[var(--cyan)] transition-colors">+1 (352) 814-3988</a>
+          </div>
+        </div>
+        <div class="glass rounded-2xl p-6 flex items-start gap-4">
+          <div class="w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0" style="background:rgba(0,255,157,0.12);">
+            <svg class="w-5 h-5 text-[var(--accent)]" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+          </div>
+          <div>
+            <p class="font-semibold text-sm mb-1" data-i18n="contact.info.loc.title">Ubicación</p>
+            <p class="text-gray-400 text-sm" data-i18n="contact.info.loc.desc">Orlando, FL · Trabajo remoto global</p>
+          </div>
+        </div>
+        <!-- Social -->
+        <div class="glass rounded-2xl p-6">
+          <p class="font-semibold text-sm mb-4" data-i18n="contact.info.social">Sígueme en redes</p>
+          <div class="flex gap-3">
+            <a href="https://www.instagram.com/richardmotatorres/" target="_blank" rel="noopener noreferrer" class="w-10 h-10 rounded-xl glass flex items-center justify-center hover:border-[var(--accent)] hover:text-[var(--accent)] transition-all" aria-label="Instagram">
+              <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+            </a>
+            <a href="https://github.com/ricar232" target="_blank" rel="noopener noreferrer" class="w-10 h-10 rounded-xl glass flex items-center justify-center hover:border-[var(--accent)] hover:text-[var(--accent)] transition-all" aria-label="GitHub">
+              <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" clip-rule="evenodd"/></svg>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Contact Form -->
+      <div class="lg:col-span-3">
+        <form id="contact-form" class="glass rounded-2xl p-8 space-y-5" novalidate>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+            <div>
+              <label for="name" class="block text-sm font-semibold mb-2"><span data-i18n="contact.form.name">Nombre completo</span> <span class="text-[var(--accent)]">*</span></label>
+              <input type="text" id="name" name="name" class="form-input" placeholder="Tu nombre" data-i18n-ph="contact.form.name_ph" required autocomplete="name" aria-required="true"/>
+              <p class="error-msg text-xs text-red-400 mt-1 hidden" id="name-error" data-i18n="contact.form.name_err">Por favor, ingresa tu nombre.</p>
+            </div>
+            <div>
+              <label for="email" class="block text-sm font-semibold mb-2"><span data-i18n="contact.form.email">Email</span> <span class="text-[var(--accent)]">*</span></label>
+              <input type="email" id="email" name="email" class="form-input" placeholder="tu@email.com" data-i18n-ph="contact.form.email_ph" required autocomplete="email" aria-required="true"/>
+              <p class="error-msg text-xs text-red-400 mt-1 hidden" id="email-error" data-i18n="contact.form.email_err">Ingresa un email válido.</p>
+            </div>
+          </div>
+          <div>
+            <label for="service" class="block text-sm font-semibold mb-2" data-i18n="contact.form.service">Servicio de interés</label>
+            <select id="service" name="service" class="form-input" style="cursor:pointer;">
+              <option value="" data-i18n="contact.form.service_default">Selecciona un servicio…</option>
+              <option value="web" data-i18n="services.card1.title">Diseño Web Personalizado</option>
+              <option value="ecommerce" data-i18n="services.card2.title">Tienda Online (E-commerce)</option>
+              <option value="landing" data-i18n="services.card4.title">Landing Page</option>
+              <option value="seo" data-i18n="services.card3.title">SEO + Optimización</option>
+              <option value="app" data-i18n="services.card6.title">Web App Personalizada</option>
+              <option value="otro">Otro</option>
+            </select>
+          </div>
+          <div>
+            <label for="message" class="block text-sm font-semibold mb-2"><span data-i18n="contact.form.msg">Cuéntame tu proyecto</span> <span class="text-[var(--accent)]">*</span></label>
+            <textarea id="message" name="message" rows="5" class="form-input resize-none" placeholder="Describe brevemente tu proyecto, objetivos y cualquier detalle relevante…" data-i18n-ph="contact.form.msg_ph" required aria-required="true"></textarea>
+            <p class="error-msg text-xs text-red-400 mt-1 hidden" id="message-error" data-i18n="contact.form.msg_err">Por favor, escribe un mensaje.</p>
+          </div>
+          <button type="submit" class="btn-primary w-full justify-center text-base py-4" id="submit-btn">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"/></svg>
+            <span data-i18n="contact.form.submit">Enviar mensaje</span>
+          </button>
+          <!-- Success message -->
+          <div id="form-success" class="hidden text-center py-6">
+            <div class="text-4xl mb-3" aria-hidden="true">🎉</div>
+            <p class="font-bold text-[var(--accent)] text-lg" data-i18n="contact.form.success_title">¡Mensaje enviado con éxito!</p>
+            <p class="text-gray-400 text-sm mt-2" data-i18n="contact.form.success_desc">Te contestaré en menos de 24 horas. ¡Hablemos!</p>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     FOOTER
+============================================================ -->
+<footer class="border-t py-16" style="background:#080808;border-color:rgba(255,255,255,0.06);">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 mb-12">
+      <!-- Brand -->
+      <div class="lg:col-span-2">
+        <a href="#inicio" class="flex items-center gap-2 mb-4" aria-label="Pycrafted inicio">
+          <div class="w-8 h-8 rounded-lg flex items-center justify-center" style="background:linear-gradient(135deg,var(--accent),var(--cyan))">
+            <svg class="w-5 h-5 text-black" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true"><path d="M3 4a1 1 0 011-1h12a1 1 0 011 1v2a1 1 0 01-.293.707L13 10.414V17a1 1 0 01-1.447.894l-4-2A1 1 0 017 15V10.414L3.293 6.707A1 1 0 013 6V4z"/></svg>
+          </div>
+          <span class="font-black text-xl">Py<span class="gradient-text">crafted</span></span>
+        </a>
+        <p class="text-gray-500 text-sm leading-relaxed max-w-xs" data-i18n="footer.tagline">Diseño y desarrollo web premium para emprendedores y empresas que quieren destacar.</p>
+      </div>
+      <!-- Links -->
+      <div>
+        <p class="font-bold text-sm mb-4" data-i18n="footer.nav.title">Navegación</p>
+        <ul class="space-y-2.5">
+          <li><a href="#inicio" class="text-gray-500 text-sm hover:text-[var(--accent)] transition-colors" data-i18n="nav.home">Inicio</a></li>
+          <li><a href="#servicios" class="text-gray-500 text-sm hover:text-[var(--accent)] transition-colors" data-i18n="nav.services">Servicios</a></li>
+
+          <li><a href="#sobre-mi" class="text-gray-500 text-sm hover:text-[var(--accent)] transition-colors" data-i18n="nav.about">Sobre mí</a></li>
+        </ul>
+      </div>
+    </div>
+    <!-- Bottom bar -->
+    <div class="border-t pt-8 flex flex-col sm:flex-row justify-between items-center gap-4" style="border-color:rgba(255,255,255,0.06);">
+      <p class="text-gray-600 text-sm" data-i18n="footer.rights">© 2026 Pycrafted. Todos los derechos reservados.</p>
+    </div>
+  </div>
+</footer>
+
+<!-- JavaScript -->
+<script src="js/i18n.js" defer></script>
+<script src="js/main.js" defer></script>
+</body>
+</html>
