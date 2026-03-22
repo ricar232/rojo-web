@@ -48,6 +48,14 @@
 </head>
 <body class="antialiased">
 
+<!-- Global Animated Background Orbs -->
+<div class="global-orb global-orb-1" aria-hidden="true"></div>
+<div class="global-orb global-orb-2" aria-hidden="true"></div>
+<div class="global-orb global-orb-3" aria-hidden="true"></div>
+
+<!-- Scroll Progress Bar -->
+<div id="scroll-progress" class="fixed top-0 left-0 h-1 bg-gradient-to-r from-[var(--accent)] via-[var(--cyan)] to-[var(--accent)] z-[101]" style="width: 0%; box-shadow: 0 0 20px rgba(0,255,157,0.5);"></div>
+
 <!-- ============================================================
      NAVBAR
 ============================================================ -->
@@ -57,14 +65,7 @@
 
       <!-- Logo -->
       <a href="#inicio" class="flex items-center gap-2 flex-shrink-0" aria-label="Pycrafted inicio">
-        <div class="w-8 h-8 rounded-lg flex items-center justify-center" style="background:linear-gradient(135deg,var(--accent),var(--cyan))">
-          <svg class="w-5 h-5 text-black" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
-            <path d="M3 4a1 1 0 011-1h12a1 1 0 011 1v2a1 1 0 01-.293.707L13 10.414V17a1 1 0 01-1.447.894l-4-2A1 1 0 017 15V10.414L3.293 6.707A1 1 0 013 6V4z"/>
-          </svg>
-        </div>
-        <span class="font-black text-xl tracking-tight">
-          Py<span class="gradient-text">crafted</span>
-        </span>
+        <img src="img/logo1.png" alt="Pycrafted logo" class="w-40 h-40 sm:w-44 h-44 md:w-48 h-48 lg:w-52 h-52 object-contain" />
       </a>
 
       <!-- Desktop Nav Links -->
@@ -310,9 +311,18 @@
 <!-- ============================================================
      SERVICIOS
 ============================================================ -->
-<section id="servicios" class="relative py-24 lg:py-32 overflow-hidden">
-  <div class="orb orb-1 opacity-50" aria-hidden="true" style="top:auto;bottom:-200px;right:-200px;"></div>
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<section id="servicios" class="relative py-24 lg:py-32 overflow-hidden services-section">
+  <canvas id="particles-servicios" class="absolute inset-0 pointer-events-none z-0"></canvas>
+  <!-- Animated Background Elements -->
+  <div class="services-bg-grid" aria-hidden="true"></div>
+  <div class="services-mesh" aria-hidden="true"></div>
+  <div class="orb orb-services-1" aria-hidden="true"></div>
+  <div class="orb orb-services-2" aria-hidden="true"></div>
+  <div class="services-gradient-line services-line-1" aria-hidden="true"></div>
+  <div class="services-gradient-line services-line-2" aria-hidden="true"></div>
+  <div class="services-gradient-line services-line-3" aria-hidden="true"></div>
+  
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
     <!-- Heading -->
     <div class="text-center mb-16">
       <div class="section-tag" data-i18n="nav.services" data-i18n="services.tag">Servicios</div>
@@ -395,7 +405,8 @@
 <!-- ============================================================
      SOBRE MÍ
 ============================================================ -->
-<section id="sobre-mi" class="py-24 lg:py-32 overflow-hidden">
+<section id="sobre-mi" class="relative py-24 lg:py-32 overflow-hidden">
+  <canvas id="particles-sobre-mi" class="absolute inset-0 pointer-events-none z-0"></canvas>
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
 
@@ -484,7 +495,16 @@
 <!-- ============================================================
      PROCESO
 ============================================================ -->
-<section id="proceso" class="py-24 lg:py-32 overflow-hidden" style="background:rgba(255,255,255,0.02);">
+<section id="proceso" class="relative py-24 lg:py-32 overflow-hidden">
+  <canvas id="particles-proceso" class="absolute inset-0 pointer-events-none z-0"></canvas>
+  <!-- Animated Background Elements -->
+  <div class="services-bg-grid" aria-hidden="true"></div>
+  <div class="services-mesh" aria-hidden="true"></div>
+  <div class="orb orb-services-1" aria-hidden="true"></div>
+  <div class="orb orb-services-2" aria-hidden="true"></div>
+  <div class="services-gradient-line services-line-1" aria-hidden="true"></div>
+  <div class="services-gradient-line services-line-2" aria-hidden="true"></div>
+  <div class="services-gradient-line services-line-3" aria-hidden="true"></div>
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="text-center mb-16">
       <div class="section-tag" data-i18n="nav.process" data-i18n="process.tag">Proceso</div>
@@ -549,7 +569,8 @@
 <!-- ============================================================
      TESTIMONIOS
 ============================================================ -->
-<section id="testimonios" class="py-24 lg:py-32 overflow-hidden">
+<section id="testimonios" class="relative py-24 lg:py-32 overflow-hidden">
+  <canvas id="particles-testimonios" class="absolute inset-0 pointer-events-none z-0"></canvas>
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="text-center mb-14">
       <div class="section-tag" data-i18n="test.tag">Testimonios</div>
@@ -701,7 +722,8 @@
 <!-- ============================================================
      CONTACTO
 ============================================================ -->
-<section id="contacto" class="py-24 lg:py-32 overflow-hidden">
+<section id="contacto" class="relative py-24 lg:py-32 overflow-hidden">
+  <canvas id="particles-contacto" class="absolute inset-0 pointer-events-none z-0"></canvas>
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="text-center mb-14">
       <div class="section-tag" data-i18n="contact.tag">Contacto</div>
@@ -804,33 +826,21 @@
 <!-- ============================================================
      FOOTER
 ============================================================ -->
-<footer class="border-t py-16" style="background:#080808;border-color:rgba(255,255,255,0.06);">
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 mb-12 text-center sm:text-left">
-      <!-- Brand -->
-      <div class="lg:col-span-2">
-        <a href="#inicio" class="flex items-center justify-center sm:justify-start gap-2 mb-4" aria-label="Pycrafted inicio">
-          <div class="w-8 h-8 rounded-lg flex items-center justify-center" style="background:linear-gradient(135deg,var(--accent),var(--cyan))">
-            <svg class="w-5 h-5 text-black" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true"><path d="M3 4a1 1 0 011-1h12a1 1 0 011 1v2a1 1 0 01-.293.707L13 10.414V17a1 1 0 01-1.447.894l-4-2A1 1 0 017 15V10.414L3.293 6.707A1 1 0 013 6V4z"/></svg>
-          </div>
-          <span class="font-black text-xl">Py<span class="gradient-text">crafted</span></span>
-        </a>
-        <p class="text-gray-500 text-sm leading-relaxed max-w-xs mx-auto sm:mx-0" data-i18n="footer.tagline">Diseño y desarrollo web premium para emprendedores y empresas que quieren destacar.</p>
+<footer class="border-t py-16 footer-area relative overflow-hidden">
+  <canvas id="particles-footer" class="absolute inset-0 pointer-events-none z-0"></canvas>
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+    <div class="footer-content flex flex-col items-center gap-8">
+      <a href="#inicio" class="flex items-center justify-center" aria-label="Pycrafted inicio">
+        <img src="img/logo.png" alt="Pycrafted logo" class="w-44 h-44 sm:w-48 h-48 md:w-52 h-52 lg:w-56 h-56 object-contain" />
+      </a>
+      <p class="text-gray-400 text-sm max-w-2xl">Diseño web premium, ultra responsive y con animaciones avanzadas para aumentar conversiones y marca.</p>
+      <div class="footer-links flex flex-wrap justify-center gap-6 text-sm font-medium">
+        <a href="#inicio" class="text-gray-400 hover:text-[var(--accent)] transition">Inicio</a>
+        <a href="#servicios" class="text-gray-400 hover:text-[var(--accent)] transition">Servicios</a>
+        <a href="#sobre-mi" class="text-gray-400 hover:text-[var(--accent)] transition">Sobre mí</a>
+        <a href="#contacto" class="text-gray-400 hover:text-[var(--accent)] transition">Contacto</a>
       </div>
-      <!-- Links -->
-      <div>
-        <p class="font-bold text-sm mb-4" data-i18n="footer.nav.title">Navegación</p>
-        <ul class="space-y-2.5">
-          <li><a href="#inicio" class="text-gray-500 text-sm hover:text-[var(--accent)] transition-colors" data-i18n="nav.home">Inicio</a></li>
-          <li><a href="#servicios" class="text-gray-500 text-sm hover:text-[var(--accent)] transition-colors" data-i18n="nav.services">Servicios</a></li>
-
-          <li><a href="#sobre-mi" class="text-gray-500 text-sm hover:text-[var(--accent)] transition-colors" data-i18n="nav.about">Sobre mí</a></li>
-        </ul>
-      </div>
-    </div>
-    <!-- Bottom bar -->
-    <div class="border-t pt-8 flex flex-col sm:flex-row justify-between items-center gap-4" style="border-color:rgba(255,255,255,0.06);">
-      <p class="text-gray-600 text-sm" data-i18n="footer.rights">© 2026 Pycrafted. Todos los derechos reservados.</p>
+      <p class="text-gray-500 text-sm">© 2026 Pycrafted. Todos los derechos reservados.</p>
     </div>
   </div>
 </footer>

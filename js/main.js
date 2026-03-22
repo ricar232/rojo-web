@@ -9,12 +9,26 @@ gsap.registerPlugin(ScrollTrigger, TextPlugin);
 const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
 // ─────────────────────────────────────────────
-// NAVBAR: scroll effect + glass
+// SCROLL PROGRESS BAR + NAVBAR EFFECT + PARALLAX
 // ─────────────────────────────────────────────
 const navbar = document.getElementById('navbar');
+const scrollProgress = document.getElementById('scroll-progress');
+
 const handleScroll = () => {
+  const scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
+  const scrolled = (window.scrollY / scrollHeight) * 100;
+  if (scrollProgress) scrollProgress.style.width = scrolled + '%';
+  
   if (window.scrollY > 60) navbar.classList.add('scrolled');
   else navbar.classList.remove('scrolled');
+  
+  // Parallax orbs
+  const orbs = document.querySelectorAll('.orb');
+  orbs.forEach((orb, idx) => {
+    const speed = (idx + 1) * 0.3;
+    const yOffset = window.scrollY * speed;
+    orb.style.transform = `translateY(${yOffset}px)`;
+  });
 };
 window.addEventListener('scroll', handleScroll, { passive: true });
 handleScroll();
@@ -112,6 +126,77 @@ document.addEventListener('keydown', e => {
 })();
 
 // ─────────────────────────────────────────────
+// GENERAL PARTICLE FUNCTION FOR SECTIONS
+// ─────────────────────────────────────────────
+function initSectionParticles(canvasId) {
+  const canvas = document.getElementById(canvasId);
+  if (!canvas || prefersReducedMotion) return;
+  const ctx = canvas.getContext('2d');
+  let w, h, particles;
+
+  function resize() {
+    w = canvas.width  = canvas.offsetWidth;
+    h = canvas.height = canvas.offsetHeight;
+  }
+
+  function createParticles() {
+    const count = Math.min(80, Math.floor(w * h / 10000)); // Even more particles
+    particles = Array.from({ length: count }, () => ({
+      x: Math.random() * w,
+      y: Math.random() * h,
+      r: Math.random() * 3.5 + 1, // Slightly bigger
+      dx: (Math.random() - 0.5) * 0.5,
+      dy: (Math.random() - 0.5) * 0.5,
+      o: Math.random() * 0.9 + 0.4, // Even higher opacity
+      color: Math.random() > 0.5 ? '0,255,157' : '0,191,255'
+    }));
+  }
+
+  function draw() {
+    ctx.clearRect(0, 0, w, h);
+    particles.forEach(p => {
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(${p.color},${p.o})`;
+      ctx.fill();
+      p.x += p.dx; p.y += p.dy;
+      if (p.x < 0 || p.x > w) p.dx *= -1;
+      if (p.y < 0 || p.y > h) p.dy *= -1;
+    });
+    // Connecting lines
+    for (let i = 0; i < particles.length; i++) {
+      for (let j = i + 1; j < particles.length; j++) {
+        const dx = particles[i].x - particles[j].x;
+        const dy = particles[i].y - particles[j].y;
+        const dist = Math.sqrt(dx*dx + dy*dy);
+        if (dist < 140) {
+          ctx.beginPath();
+          ctx.moveTo(particles[i].x, particles[i].y);
+          ctx.lineTo(particles[j].x, particles[j].y);
+          ctx.strokeStyle = `rgba(0,255,157,${0.2 * (1 - dist/140)})`;
+          ctx.lineWidth = 1;
+          ctx.stroke();
+        }
+      }
+    }
+    requestAnimationFrame(draw);
+  }
+
+  resize();
+  createParticles();
+  draw();
+  window.addEventListener('resize', () => { resize(); createParticles(); });
+}
+
+// Initialize particles for sections
+initSectionParticles('particles-servicios');
+initSectionParticles('particles-sobre-mi');
+initSectionParticles('particles-proceso');
+initSectionParticles('particles-testimonios');
+initSectionParticles('particles-contacto');
+initSectionParticles('particles-footer');
+
+// ─────────────────────────────────────────────
 // KINETIC TYPING HERO
 // ─────────────────────────────────────────────
 (function heroTyping() {
@@ -178,10 +263,10 @@ function setupScrollFade(selector, opts = {}) {
   });
 }
 
-setupScrollFade('.service-card',    { stagger: 0.08, staggerByIndex: true });
+setupScrollFade('.service-card',    { stagger: 0.06, staggerByIndex: true, y: 60, duration: 0.8 });
 
-setupScrollFade('.process-step-item', { stagger: 0.12, staggerByIndex: true });
-setupScrollFade('.testimonials-track .service-card', { stagger: 0.1, staggerByIndex: true });
+setupScrollFade('.process-step-item', { stagger: 0.1, staggerByIndex: true, y: 50, duration: 0.8 });
+setupScrollFade('.testimonials-track .service-card', { stagger: 0.08, staggerByIndex: true, y: 40, duration: 0.7 });
 
 // Section headings
 gsap.utils.toArray('.section-tag, h2').forEach(el => {
