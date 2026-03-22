@@ -115,7 +115,7 @@
 <!-- ============================================================
      HERO + 3D
 ============================================================ -->
-<section id="inicio" class="relative w-full h-screen min-h-[800px] flex mx-auto items-center justify-center overflow-hidden hero-grid">
+<section id="inicio" class="relative w-full lg:h-screen min-h-[800px] flex mx-auto items-center justify-center lg:overflow-hidden hero-grid py-12 lg:py-0">
   <!-- Background Elements -->
   <canvas id="particles-canvas" class="absolute inset-0 pointer-events-none z-[1]" aria-hidden="true"></canvas>
   <div class="orb orb-1 absolute w-[600px] h-[600px] rounded-full blur-[120px] pointer-events-none z-[0] bg-[rgba(0,255,157,0.12)] -top-[200px] -right-[200px]" aria-hidden="true"></div>
@@ -123,7 +123,7 @@
   <div class="absolute inset-0 bg-gradient-to-b from-transparent via-black/20 to-black/80 z-[2] pointer-events-none" aria-hidden="true"></div>
 
   <!-- Content Container -->
-  <div class="relative z-[10] w-full max-w-7xl mx-auto px-4 sm:px-6 h-full flex flex-col lg:flex-row items-center justify-center lg:justify-between gap-12 pt-20">
+  <div class="relative z-[10] w-full max-w-7xl mx-auto px-4 sm:px-6 lg:h-full flex flex-col lg:flex-row items-center justify-center lg:justify-between gap-12 pt-20 lg:pt-0">
     
     <!-- Text Content (Left) -->
     <div class="flex-1 flex flex-col items-center lg:items-start text-center lg:text-left">
@@ -156,7 +156,7 @@
     </div>
 
     <!-- 3D CSS Phone (Right) -->
-    <div id="hero-3d-container" class="flex-1 relative w-full aspect-[4/5] max-h-[600px] flex items-center justify-center z-10 hidden sm:flex cursor-crosshair" style="perspective: 1200px;">
+    <div id="hero-3d-container" class="flex-1 relative w-full h-[600px] lg:h-[680px] flex items-center justify-center z-10 cursor-crosshair" style="perspective: 1200px;">
       
       <!-- Subtle glow behind the 3D model -->
       <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[90%] h-[90%] bg-gradient-to-tr from-[var(--accent)] to-[var(--cyan)] rounded-full blur-[100px] opacity-20 pointer-events-none z-0"></div>
@@ -420,6 +420,9 @@
             <div class="glass rounded-xl px-4 py-2 text-sm font-semibold" title="GSAP">🎬 GSAP</div>
             <div class="glass rounded-xl px-4 py-2 text-sm font-semibold" title="Framer">🎨 Framer</div>
             <div class="glass rounded-xl px-4 py-2 text-sm font-semibold" title="Webflow">🌐 Webflow</div>
+            <div class="glass rounded-xl px-4 py-2 text-sm font-semibold" title="Flutter">💙 Flutter</div>
+            <div class="glass rounded-xl px-4 py-2 text-sm font-semibold" title="React">⚛️ React</div>
+            <div class="glass rounded-xl px-4 py-2 text-sm font-semibold" title="Node.js">🟢 Node.js</div>
           </div>
         </div>
       </div>
@@ -803,16 +806,16 @@
 ============================================================ -->
 <footer class="border-t py-16" style="background:#080808;border-color:rgba(255,255,255,0.06);">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 mb-12">
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 mb-12 text-center sm:text-left">
       <!-- Brand -->
       <div class="lg:col-span-2">
-        <a href="#inicio" class="flex items-center gap-2 mb-4" aria-label="Pycrafted inicio">
+        <a href="#inicio" class="flex items-center justify-center sm:justify-start gap-2 mb-4" aria-label="Pycrafted inicio">
           <div class="w-8 h-8 rounded-lg flex items-center justify-center" style="background:linear-gradient(135deg,var(--accent),var(--cyan))">
             <svg class="w-5 h-5 text-black" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true"><path d="M3 4a1 1 0 011-1h12a1 1 0 011 1v2a1 1 0 01-.293.707L13 10.414V17a1 1 0 01-1.447.894l-4-2A1 1 0 017 15V10.414L3.293 6.707A1 1 0 013 6V4z"/></svg>
           </div>
           <span class="font-black text-xl">Py<span class="gradient-text">crafted</span></span>
         </a>
-        <p class="text-gray-500 text-sm leading-relaxed max-w-xs" data-i18n="footer.tagline">Diseño y desarrollo web premium para emprendedores y empresas que quieren destacar.</p>
+        <p class="text-gray-500 text-sm leading-relaxed max-w-xs mx-auto sm:mx-0" data-i18n="footer.tagline">Diseño y desarrollo web premium para emprendedores y empresas que quieren destacar.</p>
       </div>
       <!-- Links -->
       <div>
