@@ -1,0 +1,74 @@
+{
+  "nav": {
+    "about": "About Us",
+    "services": "Services",
+    "projects": "Projects",
+    "cta": "Get a Quote",
+    "menu_open": "Open menu",
+    "menu_close": "Close menu"
+  },
+  "hero": {
+    "tag": "Premium Construction",
+    "title1": "Redefining",
+    "title_em": "Luxury",
+    "title2": "Architecture",
+    "sub": "Avant-garde design, exceptional materials, and flawless execution. We build the masterpiece you deserve to live in.",
+    "btn1": "Start Project →",
+    "btn2": "View Projects",
+    "scroll": "Scroll"
+  },
+  "about": {
+    "badge_n": "15",
+    "badge_l": "Years of\nExcellence",
+    "tag": "Our Legacy",
+    "title": "Perfection in every",
+    "title_em": "Detail",
+    "sub": "RMT Solutions is the gold standard in high-end construction and remodeling. Every project is a statement of aesthetics and functionality.",
+    "val1_h": "Uncompromising Craftsmanship",
+    "val1_p": "Imported marbles, fine woods, and millimeter-perfect finishes executed by experts.",
+    "val2_h": "Technological Innovation",
+    "val2_p": "Integrated smart home systems and efficiency for the home of the future."
+  },
+  "services": {
+    "tag": "Expertise",
+    "title": "Comprehensive",
+    "title_em": "Solutions",
+    "srv1_h": "Signature Architecture",
+    "srv1_p": "Unique architectural design tailored to your lifestyle and the natural environment.",
+    "srv2_h": "Total Remodeling",
+    "srv2_p": "Extreme transformations that elevate the value and aesthetics of existing properties.",
+    "srv3_h": "Interior Design",
+    "srv3_p": "Curated selection of furniture, lighting, and materials for sophisticated spaces."
+  },
+  "projects": {
+    "tag": "Portfolio",
+    "title": "Master",
+    "title_em": "pieces",
+    "p1_tag": "New Residence",
+    "p1_name": "Emerald House",
+    "p1_desc": "Contemporary design with a geometric facade and an infinity pool. Seamless integration with the landscape.",
+    "p2_tag": "Interiors",
+    "p2_name": "The Kitchen Studio",
+    "p2_desc": "Marquina marble island and dark walnut cabinetry.",
+    "p3_tag": "Penthouse",
+    "p3_name": "Skyline Penthouse",
+    "p3_desc": "Double-height ceilings and panoramic city views.",
+    "p4_tag": "Eco-Luxury",
+    "p4_name": "Botanical Villa",
+    "p4_desc": "Sustainable design with LEED certification, solar panels, and vertical gardens."
+  },
+  "stats": {
+    "s1": "Projects",
+    "s2": "Years",
+    "s3": "% Satisfaction"
+  },
+  "footer": {
+    "desc": "Building the future of luxury architecture in Mexico with passion and precision.",
+    "explore": "Explore",
+    "home": "Home",
+    "contact": "Contact",
+    "location": "Mexico City",
+    "rights": "© 2026 RMT Solutions. All rights reserved.",
+    "design": "Premium Design"
+  }
+}
