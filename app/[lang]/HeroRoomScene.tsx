@@ -64,13 +64,13 @@ function build(mount: HTMLDivElement) {
   const lookTarget = new THREE.Vector3(0, 1, -0.4);
   camera.lookAt(lookTarget);
 
-  const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
-  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.5));
-  renderer.shadowMap.enabled = true;
-  // VSM (variance shadow maps) trades a little precision for genuinely soft,
-  // feathered shadow edges — the diffused, "studio render" look — instead of
-  // PCF's slightly harder edge.
-  renderer.shadowMap.type = THREE.VSMShadowMap;
+  const renderer = new THREE.WebGLRenderer({ antialias: !isSmall, alpha: true });
+  // The canvas is now full-page (a lot more pixels to shade than the old
+  // cropped hero box), so pixel ratio is capped more conservatively —
+  // especially on mobile GPUs — to keep scrolling smooth.
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio, isSmall ? 1 : 1.25));
+  renderer.shadowMap.enabled = !isSmall;
+  renderer.shadowMap.type = THREE.PCFSoftShadowMap;
   renderer.localClippingEnabled = true;
   renderer.outputColorSpace = THREE.SRGBColorSpace;
   renderer.toneMapping = THREE.ACESFilmicToneMapping;
@@ -192,9 +192,12 @@ function build(mount: HTMLDivElement) {
     clearcoat: 0.6, clearcoatRoughness: 0.15, envMapIntensity: 1.3,
     clippingPlanes: [furniturePlane],
   });
+  // Real transmission (refraction) requires Three.js to render the opaque
+  // scene to an offscreen buffer every frame — worth it for the glass look
+  // on desktop, but skipped on mobile GPUs in favor of plain transparency.
   const glassTop = new THREE.MeshPhysicalMaterial({
     color: 0x111111, roughness: 0.03, metalness: 0,
-    transmission: 0.55, thickness: 0.3, ior: 1.45,
+    transmission: isSmall ? 0 : 0.55, thickness: 0.3, ior: 1.45,
     transparent: true, opacity: 0.85, envMapIntensity: 1.2,
     clippingPlanes: [furniturePlane],
   });
@@ -503,10 +506,9 @@ function build(mount: HTMLDivElement) {
   const windowLight = new THREE.SpotLight(0xfff3d6, 10, 12, Math.PI / 5, 0.5, 1.2);
   windowLight.position.set(3.5, 3.2, 1.5);
   windowLight.target.position.set(0.5, 0.5, -1);
-  windowLight.castShadow = true;
-  windowLight.shadow.mapSize.set(1024, 1024);
-  windowLight.shadow.radius = 6;
-  windowLight.shadow.blurSamples = 16;
+  windowLight.castShadow = !isSmall;
+  windowLight.shadow.mapSize.set(768, 768);
+  windowLight.shadow.radius = 4;
   room.add(windowLight, windowLight.target);
 
   const coolFill = new THREE.PointLight(0x6b7d9e, 2.4, 6, 2);
@@ -543,7 +545,18 @@ function build(mount: HTMLDivElement) {
   // ---- Animate ----
   let raf = 0;
   const timer = new THREE.Timer();
+  // This is a slow ambient background, not something that needs a 60/120Hz
+  // display's full refresh rate — capping to ~30fps roughly halves the GPU
+  // work of a full-page WebGL scene without any visible loss of smoothness.
+  const frameInterval = 1000 / 30;
+  let lastFrameTime = 0;
   function render() {
+    if (!reduceMotion) {
+      raf = requestAnimationFrame(render);
+      const now = performance.now();
+      if (now - lastFrameTime < frameInterval) return;
+      lastFrameTime = now;
+    }
     timer.update();
     const t = timer.getElapsed();
     const sweep = reduceMotion ? 0 : Math.sin(t * 0.35) * 2.2; // sweeps between -2.2 and 2.2
@@ -563,11 +576,8 @@ function build(mount: HTMLDivElement) {
       camera.position.x = 5.4 + pointerX * 0.5;
       camera.position.y = 2.15 - pointerY * 0.3;
       camera.lookAt(lookTarget);
-      composer.render();
-      raf = requestAnimationFrame(render);
-    } else {
-      composer.render();
     }
+    composer.render();
   }
   render();
 
