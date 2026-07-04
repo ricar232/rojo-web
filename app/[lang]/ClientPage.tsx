@@ -331,7 +331,7 @@ export default function ClientPage({ dict }: { dict: Dictionary }) {
           <div className="ft-col">
             <h5>{dict.footer.contact}</h5>
             <ul>
-              <li><a href="tel:+525587654321">+52 55 8765 4321</a></li>
+              <li><a href="tel:+14076758086">+1 (407) 675-8086</a></li>
               <li><a href="mailto:hola@rmtsolutions.com">hola@rmtsolutions.com</a></li>
               <li><span>{dict.footer.location}</span></li>
             </ul>
