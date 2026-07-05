@@ -48,6 +48,20 @@ const nextConfig: NextConfig = {
           },
         ],
       },
+      {
+        // Static files served straight from /public (project photos, the
+        // sofa .glb, logos) get no cache header from Next by default, so
+        // browsers re-fetch them on every visit. Rename the file (or add a
+        // ?v=2 query) when swapping one of these out, since a repeat visitor
+        // won't see the change until this cache expires.
+        source: "/:path*.:ext(jpg|jpeg|png|webp|avif|svg|glb|ico)",
+        headers: [
+          {
+            key: "Cache-Control",
+            value: "public, max-age=604800, stale-while-revalidate=86400",
+          },
+        ],
+      },
     ];
   },
 };

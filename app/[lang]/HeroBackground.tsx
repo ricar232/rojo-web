@@ -1,7 +1,13 @@
 'use client';
 
 import { useSyncExternalStore } from "react";
-import HeroRoomScene from "./HeroRoomScene";
+import dynamic from "next/dynamic";
+
+// Three.js + its jsm addons (GLTFLoader, EffectComposer, RoomEnvironment...)
+// weigh ~650KB on their own. Loading this dynamically keeps that whole chunk
+// out of the initial script graph so it can't delay hydration of the actual
+// page (nav, CTAs, text) — it's fetched right after, in the background.
+const HeroRoomScene = dynamic(() => import("./HeroRoomScene"), { ssr: false });
 
 type Particle = {
   id: number;
