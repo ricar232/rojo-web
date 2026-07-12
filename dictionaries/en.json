@@ -2,6 +2,7 @@
   "nav": {
     "about": "About Us",
     "services": "Services",
+    "process": "Process",
     "projects": "Projects",
     "cta": "Get a Quote",
     "menu_open": "Open menu",
@@ -39,6 +40,28 @@
     "srv2_p": "Extreme transformations that elevate the value and aesthetics of existing properties.",
     "srv3_h": "Interior Design",
     "srv3_p": "Curated selection of furniture, lighting, and materials for sophisticated spaces."
+  },
+  "process": {
+    "tag": "Real Work",
+    "title": "From Demolition to",
+    "title_em": "Transformation",
+    "sub": "An unfiltered look at a project we completed start to finish — this is how we work, and how we deliver.",
+    "steps_title": "Our Process",
+    "step1_tag": "Phase 01",
+    "step1_label": "Demolition",
+    "step2_tag": "Phase 02",
+    "step2_label": "Framing & Rough-In",
+    "step3_tag": "Phase 03",
+    "step3_label": "Insulation & Drywall",
+    "step4_tag": "Phase 04",
+    "step4_label": "Finishes",
+    "result_title": "The Final Result",
+    "result1_tag": "Bedroom",
+    "result1_label": "Accent Wall with Porcelain Slab",
+    "result2_tag": "Bathroom",
+    "result2_label": "Fully Remodeled Bathroom",
+    "result3_tag": "Kitchen",
+    "result3_label": "Brand New Kitchenette"
   },
   "projects": {
     "tag": "Portfolio",

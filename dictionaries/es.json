@@ -2,6 +2,7 @@
   "nav": {
     "about": "Nosotros",
     "services": "Servicios",
+    "process": "Proceso",
     "projects": "Proyectos",
     "cta": "Cotizar Ahora",
     "menu_open": "Abrir menú",
@@ -39,6 +40,28 @@
     "srv2_p": "Transformaciones extremas que elevan el valor y la estética de propiedades existentes.",
     "srv3_h": "Diseño de Interiores",
     "srv3_p": "Selección curada de mobiliario, iluminación y materiales para espacios sofisticados."
+  },
+  "process": {
+    "tag": "Trabajo Real",
+    "title": "De la Demolición a la",
+    "title_em": "Transformación",
+    "sub": "Un vistazo real, sin filtros, a un proyecto que hicimos de principio a fin: así trabajamos, y así entregamos.",
+    "steps_title": "Nuestro Proceso",
+    "step1_tag": "Fase 01",
+    "step1_label": "Demolición",
+    "step2_tag": "Fase 02",
+    "step2_label": "Estructura e Instalaciones",
+    "step3_tag": "Fase 03",
+    "step3_label": "Aislamiento y Drywall",
+    "step4_tag": "Fase 04",
+    "step4_label": "Acabados",
+    "result_title": "El Resultado Final",
+    "result1_tag": "Recámara",
+    "result1_label": "Muro de Acento con Porcelanato",
+    "result2_tag": "Baño",
+    "result2_label": "Baño Completo Remodelado",
+    "result3_tag": "Cocina",
+    "result3_label": "Kitchenette Nueva"
   },
   "projects": {
     "tag": "Portafolio",

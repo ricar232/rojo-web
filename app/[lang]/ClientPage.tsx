@@ -122,6 +122,7 @@ export default function ClientPage({ dict }: { dict: Dictionary }) {
           <ul className="nav-links">
             <li><button onClick={() => goTo("about")}>{dict.nav.about}</button></li>
             <li><button onClick={() => goTo("services")}>{dict.nav.services}</button></li>
+            <li><button onClick={() => goTo("process")}>{dict.nav.process}</button></li>
             <li><button onClick={() => goTo("projects")}>{dict.nav.projects}</button></li>
           </ul>
           <button className="nav-btn" onClick={() => goTo("contact")}>{dict.nav.cta}</button>
@@ -142,6 +143,7 @@ export default function ClientPage({ dict }: { dict: Dictionary }) {
       <div id="mobile-menu" className={`mobile-menu${menuOpen ? " open" : ""}`} inert={!menuOpen}>
         <button onClick={() => goTo("about")}>{dict.nav.about}</button>
         <button onClick={() => goTo("services")}>{dict.nav.services}</button>
+        <button onClick={() => goTo("process")}>{dict.nav.process}</button>
         <button onClick={() => goTo("projects")}>{dict.nav.projects}</button>
         <button className="btn-gold" onClick={() => goTo("contact")}>{dict.nav.cta}</button>
       </div>
@@ -233,6 +235,83 @@ export default function ClientPage({ dict }: { dict: Dictionary }) {
             <span className="srv-n">03</span>
             <h3>{dict.services.srv3_h}</h3>
             <p>{dict.services.srv3_p}</p>
+          </div>
+        </div>
+      </section>
+
+      {/* PROCESS — real, unstaged photos from a project we completed */}
+      <section id="process">
+        <div className="sec-eyebrow rv">
+          <div className="sec-line"></div>
+          <span className="sec-tag">{dict.process.tag}</span>
+        </div>
+        <h2 className="sec-title rv rv1">{dict.process.title} <em>{dict.process.title_em}</em></h2>
+        <p className="sec-sub rv rv2">{dict.process.sub}</p>
+
+        <div className="rv">
+          <div className="process-steps-title">{dict.process.steps_title}</div>
+          <div className="process-steps">
+            <div className="ps">
+              <div className="ps-vis">
+                <Image src="/trabajos/01-demolicion.jpg" alt={dict.process.step1_label} fill sizes="(max-width: 768px) 50vw, 25vw" />
+                <span className="ps-n">{dict.process.step1_tag}</span>
+              </div>
+              <div className="ps-info"><span className="ps-label">{dict.process.step1_label}</span></div>
+            </div>
+            <div className="ps">
+              <div className="ps-vis">
+                <Image src="/trabajos/02-estructura.jpg" alt={dict.process.step2_label} fill sizes="(max-width: 768px) 50vw, 25vw" />
+                <span className="ps-n">{dict.process.step2_tag}</span>
+              </div>
+              <div className="ps-info"><span className="ps-label">{dict.process.step2_label}</span></div>
+            </div>
+            <div className="ps">
+              <div className="ps-vis">
+                <Image src="/trabajos/03-aislamiento.jpg" alt={dict.process.step3_label} fill sizes="(max-width: 768px) 50vw, 25vw" />
+                <span className="ps-n">{dict.process.step3_tag}</span>
+              </div>
+              <div className="ps-info"><span className="ps-label">{dict.process.step3_label}</span></div>
+            </div>
+            <div className="ps">
+              <div className="ps-vis">
+                <Image src="/trabajos/04-acabados.jpg" alt={dict.process.step4_label} fill sizes="(max-width: 768px) 50vw, 25vw" />
+                <span className="ps-n">{dict.process.step4_tag}</span>
+              </div>
+              <div className="ps-info"><span className="ps-label">{dict.process.step4_label}</span></div>
+            </div>
+          </div>
+        </div>
+
+        <div className="rv rv1">
+          <div className="process-result-title">{dict.process.result_title}</div>
+          <div className="process-result">
+            <div className="pr">
+              <div className="pr-vis">
+                <Image src="/trabajos/05-resultado-recamara.jpg" alt={dict.process.result1_label} fill sizes="(max-width: 768px) 100vw, 33vw" />
+              </div>
+              <div className="pr-overlay">
+                <span className="pr-tag">{dict.process.result1_tag}</span>
+                <span className="pr-label">{dict.process.result1_label}</span>
+              </div>
+            </div>
+            <div className="pr">
+              <div className="pr-vis">
+                <Image src="/trabajos/06-resultado-bano.jpg" alt={dict.process.result2_label} fill sizes="(max-width: 768px) 100vw, 33vw" />
+              </div>
+              <div className="pr-overlay">
+                <span className="pr-tag">{dict.process.result2_tag}</span>
+                <span className="pr-label">{dict.process.result2_label}</span>
+              </div>
+            </div>
+            <div className="pr">
+              <div className="pr-vis">
+                <Image src="/trabajos/07-resultado-cocina.jpg" alt={dict.process.result3_label} fill sizes="(max-width: 768px) 100vw, 33vw" />
+              </div>
+              <div className="pr-overlay">
+                <span className="pr-tag">{dict.process.result3_tag}</span>
+                <span className="pr-label">{dict.process.result3_label}</span>
+              </div>
+            </div>
           </div>
         </div>
       </section>

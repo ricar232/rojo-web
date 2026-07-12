@@ -273,6 +273,34 @@ button { font-family: inherit; cursor: pointer; border: none; outline: none; bac
 .srv-n { position: absolute; top: 30px; right: 30px; font-size: 14px; font-weight: 800; color: rgba(255,255,255,0.05); }
 .srv h3 { font-size: 1.3rem; margin-bottom: 12px; color: var(--gold); }
 
+/* Process (real project case study) */
+.process-steps-title, .process-result-title {
+  font-size: 12px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--w3); margin-bottom: 24px;
+}
+.process-steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; margin-bottom: 64px; }
+.ps { position: relative; border-radius: 14px; overflow: hidden; background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.05); transition: border-color 0.3s; }
+.ps:hover { border-color: rgba(212,175,55,0.3); }
+.ps-vis { position: relative; aspect-ratio: 3/4; overflow: hidden; }
+.ps-vis img { object-fit: cover; transition: transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1); }
+.ps:hover .ps-vis img { transform: scale(1.06); }
+.ps-n {
+  position: absolute; top: 12px; left: 12px; font-size: 10px; font-weight: 800;
+  letter-spacing: 0.1em; color: var(--blk); background: var(--gold);
+  padding: 4px 10px; border-radius: 20px; z-index: 1;
+}
+.ps-info { padding: 14px 16px; }
+.ps-label { font-size: 0.85rem; color: var(--w); font-weight: 600; }
+
+.process-result { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+.pr { position: relative; border-radius: 16px; overflow: hidden; aspect-ratio: 4/3; }
+.pr-vis { position: absolute; inset: 0; }
+.pr-vis img { object-fit: cover; transition: transform 0.8s cubic-bezier(0.2, 0.8, 0.2, 1); }
+.pr:hover .pr-vis img { transform: scale(1.05); }
+.pr-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.1) 55%, transparent 100%); display: flex; flex-direction: column; justify-content: flex-end; padding: 24px; }
+.pr-tag { color: var(--gold); font-size: 10px; text-transform: uppercase; letter-spacing: 0.2em; margin-bottom: 6px; font-weight: 700; }
+.pr-label { font-size: 1.1rem; font-weight: 700; }
+
 /* Projects */
 .filters { display: flex; gap: 12px; margin-bottom: 32px; flex-wrap: wrap; }
 .f-btn { padding: 8px 20px; border: 1px solid rgba(255,255,255,0.1); background: transparent; color: var(--w3); font-size: 11px; text-transform: uppercase; letter-spacing: 0.1em; border-radius: 30px; transition: all 0.3s; }
@@ -329,6 +357,8 @@ footer { padding: 80px 5% 40px; background: #050505; border-top: 1px solid rgba(
   #about { grid-template-columns: 1fr; }
   .about-imgs { max-width: 600px; margin: 0 auto; }
   .ft-grid { grid-template-columns: 1fr 1fr; }
+  .process-steps { grid-template-columns: repeat(2, 1fr); }
+  .process-result { grid-template-columns: 1fr; }
 }
 @media (max-width: 768px) {
   .orb-glow { width: 520px; height: 520px; }
@@ -341,4 +371,5 @@ footer { padding: 80px 5% 40px; background: #050505; border-top: 1px solid rgba(
   .ft-bottom { flex-direction: column; gap: 16px; text-align: center; }
   .pc-tag, .pc-name, .pc-desc { transform: none; opacity: 1; }
   .pc-overlay { background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.6) 100%); }
+  .pr-tag, .pr-label { opacity: 1; }
 }

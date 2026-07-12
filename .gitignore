@@ -39,3 +39,7 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# raw, unprocessed source photos (originals have embedded GPS/EXIF data and
+# are too large for the repo) — curated, stripped copies live in public/trabajos
+/trabajos
