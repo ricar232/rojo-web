@@ -17,7 +17,7 @@ const seo: Record<Locale, { title: string; description: string; ogDescription: s
   es: {
     title: "RMT Solutions — Remodelación y Construcción de Lujo",
     description:
-      "RMT Solutions transforma hogares en obras maestras. Remodelación y construcción de lujo con más de 15 años de experiencia en Orlando, Florida.",
+      "RMT Solutions transforma hogares en obras maestras. Remodelación y construcción de lujo con más de 5 años de experiencia en Orlando, Florida.",
     ogDescription:
       "Transformamos hogares en obras maestras. Diseño innovador, materiales excepcionales y ejecución impecable.",
     ogLocale: "es_US",
@@ -25,7 +25,7 @@ const seo: Record<Locale, { title: string; description: string; ogDescription: s
   en: {
     title: "RMT Solutions — Luxury Remodeling & Construction",
     description:
-      "RMT Solutions turns homes into masterpieces. Luxury remodeling and construction with over 15 years of experience in Orlando, Florida.",
+      "RMT Solutions turns homes into masterpieces. Luxury remodeling and construction with over 5 years of experience in Orlando, Florida.",
     ogDescription:
       "We turn homes into masterpieces. Innovative design, exceptional materials, and flawless execution.",
     ogLocale: "en_US",

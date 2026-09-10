@@ -11,6 +11,77 @@ export default function ClientPage({ dict }: { dict: Dictionary }) {
   const ringRef = useRef<HTMLDivElement>(null);
   const navRef = useRef<HTMLElement>(null);
   const [menuOpen, setMenuOpen] = useState(false);
+  const [lightbox, setLightbox] = useState<number | null>(null);
+  const [lightboxClosing, setLightboxClosing] = useState(false);
+  const closeTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  const processPhotos = [
+    { src: "/trabajos/01-demolicion.jpg", tag: dict.process.step1_tag, label: dict.process.step1_label },
+    { src: "/trabajos/02-estructura-v2.jpg", tag: dict.process.step2_tag, label: dict.process.step2_label },
+    { src: "/trabajos/03-aislamiento-v2.jpg", tag: dict.process.step3_tag, label: dict.process.step3_label },
+    { src: "/trabajos/04-acabados-v2.jpg", tag: dict.process.step4_tag, label: dict.process.step4_label },
+    { src: "/trabajos/05-resultado-recamara-v2.jpg", tag: dict.process.result1_tag, label: dict.process.result1_label },
+    { src: "/trabajos/06-resultado-bano-v2.jpg", tag: dict.process.result2_tag, label: dict.process.result2_label },
+    { src: "/trabajos/07-resultado-cocina-v2.jpg", tag: dict.process.result3_tag, label: dict.process.result3_label },
+  ];
+
+  const processVideos = [
+    { src: "/trabajos/video-antes-exterior.mp4", poster: "/trabajos/video-antes-exterior-poster.jpg", tag: dict.process.video1_tag, label: dict.process.video1_label },
+    { src: "/trabajos/video-despues-exterior.mp4", poster: "/trabajos/video-despues-exterior-poster.jpg", tag: dict.process.video2_tag, label: dict.process.video2_label },
+    { src: "/trabajos/video-recorrido-sala.mp4", poster: "/trabajos/video-recorrido-sala-poster.jpg", tag: dict.process.video3_tag, label: dict.process.video3_label },
+    { src: "/trabajos/video-recorrido-bano.mp4", poster: "/trabajos/video-recorrido-bano-poster.jpg", tag: dict.process.video4_tag, label: dict.process.video4_label },
+  ];
+
+  // Closing plays a short reverse transition before actually unmounting the
+  // lightbox, so it fades/shrinks away instead of just vanishing.
+  const closeLightbox = useCallback(() => {
+    setLightboxClosing(true);
+    if (closeTimerRef.current) clearTimeout(closeTimerRef.current);
+    closeTimerRef.current = setTimeout(() => {
+      setLightbox(null);
+      setLightboxClosing(false);
+    }, 220);
+  }, []);
+
+  const openLightbox = useCallback((i: number) => {
+    if (closeTimerRef.current) {
+      clearTimeout(closeTimerRef.current);
+      closeTimerRef.current = null;
+    }
+    setLightboxClosing(false);
+    setLightbox(i);
+  }, []);
+
+  const showPrev = useCallback((e: React.MouseEvent) => {
+    e.stopPropagation();
+    setLightbox((i) => (i === null ? null : (i - 1 + processPhotos.length) % processPhotos.length));
+  }, [processPhotos.length]);
+
+  const showNext = useCallback((e: React.MouseEvent) => {
+    e.stopPropagation();
+    setLightbox((i) => (i === null ? null : (i + 1) % processPhotos.length));
+  }, [processPhotos.length]);
+
+  useEffect(() => {
+    if (lightbox === null) return;
+    document.body.style.overflow = "hidden";
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") closeLightbox();
+      if (e.key === "ArrowRight") setLightbox((i) => (i === null ? null : (i + 1) % processPhotos.length));
+      if (e.key === "ArrowLeft") setLightbox((i) => (i === null ? null : (i - 1 + processPhotos.length) % processPhotos.length));
+    };
+    window.addEventListener("keydown", onKey);
+    return () => {
+      document.body.style.overflow = "";
+      window.removeEventListener("keydown", onKey);
+    };
+  }, [lightbox, processPhotos.length, closeLightbox]);
+
+  useEffect(() => {
+    return () => {
+      if (closeTimerRef.current) clearTimeout(closeTimerRef.current);
+    };
+  }, []);
 
   useEffect(() => {
     // Custom Cursor (skip on touch devices, there is no persistent pointer to track)
@@ -180,7 +251,7 @@ export default function ClientPage({ dict }: { dict: Dictionary }) {
       <section id="about">
         <div className="about-imgs rv">
           <div className="about-img-wrap">
-            <Image src="/project-interior.jpg" alt="Interior Design" fill sizes="(max-width: 1024px) 100vw, 45vw" style={{objectFit: 'cover'}} />
+            <Image src="/trabajos/about-closet.jpg" alt="Interior Design" fill sizes="(max-width: 1024px) 100vw, 45vw" style={{objectFit: 'cover'}} />
           </div>
           <div className="about-badge">
             <span className="about-badge-n">{dict.about.badge_n}</span>
@@ -251,70 +322,96 @@ export default function ClientPage({ dict }: { dict: Dictionary }) {
         <div className="rv">
           <div className="process-steps-title">{dict.process.steps_title}</div>
           <div className="process-steps">
-            <div className="ps">
-              <div className="ps-vis">
-                <Image src="/trabajos/01-demolicion.jpg" alt={dict.process.step1_label} fill sizes="(max-width: 768px) 50vw, 25vw" />
-                <span className="ps-n">{dict.process.step1_tag}</span>
-              </div>
-              <div className="ps-info"><span className="ps-label">{dict.process.step1_label}</span></div>
-            </div>
-            <div className="ps">
-              <div className="ps-vis">
-                <Image src="/trabajos/02-estructura.jpg" alt={dict.process.step2_label} fill sizes="(max-width: 768px) 50vw, 25vw" />
-                <span className="ps-n">{dict.process.step2_tag}</span>
-              </div>
-              <div className="ps-info"><span className="ps-label">{dict.process.step2_label}</span></div>
-            </div>
-            <div className="ps">
-              <div className="ps-vis">
-                <Image src="/trabajos/03-aislamiento.jpg" alt={dict.process.step3_label} fill sizes="(max-width: 768px) 50vw, 25vw" />
-                <span className="ps-n">{dict.process.step3_tag}</span>
-              </div>
-              <div className="ps-info"><span className="ps-label">{dict.process.step3_label}</span></div>
-            </div>
-            <div className="ps">
-              <div className="ps-vis">
-                <Image src="/trabajos/04-acabados.jpg" alt={dict.process.step4_label} fill sizes="(max-width: 768px) 50vw, 25vw" />
-                <span className="ps-n">{dict.process.step4_tag}</span>
-              </div>
-              <div className="ps-info"><span className="ps-label">{dict.process.step4_label}</span></div>
-            </div>
+            {processPhotos.slice(0, 4).map((p, i) => (
+              <button type="button" className="ps" key={p.src} onClick={() => openLightbox(i)}>
+                <div className="ps-vis">
+                  <Image src={p.src} alt={p.label} fill sizes="(max-width: 768px) 50vw, 25vw" />
+                  <span className="ps-n">{p.tag}</span>
+                  <span className="ps-zoom" aria-hidden="true">⤢</span>
+                </div>
+                <div className="ps-info"><span className="ps-label">{p.label}</span></div>
+              </button>
+            ))}
           </div>
         </div>
 
         <div className="rv rv1">
           <div className="process-result-title">{dict.process.result_title}</div>
           <div className="process-result">
-            <div className="pr">
-              <div className="pr-vis">
-                <Image src="/trabajos/05-resultado-recamara.jpg" alt={dict.process.result1_label} fill sizes="(max-width: 768px) 100vw, 33vw" />
+            {processPhotos.slice(4).map((p, i) => (
+              <button type="button" className="pr" key={p.src} onClick={() => openLightbox(i + 4)}>
+                <div className="pr-vis">
+                  <Image src={p.src} alt={p.label} fill sizes="(max-width: 768px) 100vw, 33vw" />
+                </div>
+                <span className="pr-zoom" aria-hidden="true">⤢</span>
+                <div className="pr-overlay">
+                  <span className="pr-tag">{p.tag}</span>
+                  <span className="pr-label">{p.label}</span>
+                </div>
+              </button>
+            ))}
+          </div>
+        </div>
+
+        <div className="rv rv2 process-videos">
+          <div className="process-result-title">{dict.process.video_title}</div>
+          <p className="sec-sub" style={{ marginBottom: 32 }}>{dict.process.video_sub}</p>
+          <div className="video-grid">
+            {processVideos.map((v) => (
+              <div className="vc" key={v.src}>
+                <div className="vc-stage">
+                  <video
+                    src={v.src}
+                    poster={v.poster}
+                    controls
+                    preload="none"
+                    playsInline
+                    aria-label={`${v.tag} — ${v.label}`}
+                  />
+                </div>
+                <div className="vc-info">
+                  <span className="vc-tag">{v.tag}</span>
+                  <span className="vc-label">{v.label}</span>
+                </div>
               </div>
-              <div className="pr-overlay">
-                <span className="pr-tag">{dict.process.result1_tag}</span>
-                <span className="pr-label">{dict.process.result1_label}</span>
-              </div>
-            </div>
-            <div className="pr">
-              <div className="pr-vis">
-                <Image src="/trabajos/06-resultado-bano.jpg" alt={dict.process.result2_label} fill sizes="(max-width: 768px) 100vw, 33vw" />
-              </div>
-              <div className="pr-overlay">
-                <span className="pr-tag">{dict.process.result2_tag}</span>
-                <span className="pr-label">{dict.process.result2_label}</span>
-              </div>
-            </div>
-            <div className="pr">
-              <div className="pr-vis">
-                <Image src="/trabajos/07-resultado-cocina.jpg" alt={dict.process.result3_label} fill sizes="(max-width: 768px) 100vw, 33vw" />
-              </div>
-              <div className="pr-overlay">
-                <span className="pr-tag">{dict.process.result3_tag}</span>
-                <span className="pr-label">{dict.process.result3_label}</span>
-              </div>
-            </div>
+            ))}
           </div>
         </div>
       </section>
+
+      {/* LIGHTBOX — a contained, floating preview card for the process/result
+          photos above, not a fullscreen takeover. Closing plays a short
+          reverse transition (see closeLightbox) before unmounting. */}
+      {lightbox !== null && (
+        <div
+          className={`lightbox${lightboxClosing ? " lightbox-closing" : ""}`}
+          role="dialog"
+          aria-modal="true"
+          aria-label={processPhotos[lightbox].label}
+          onClick={closeLightbox}
+        >
+          <div className="lightbox-panel" onClick={(e) => e.stopPropagation()}>
+            <div className="lightbox-stage">
+              <Image
+                key={processPhotos[lightbox].src}
+                src={processPhotos[lightbox].src}
+                alt={processPhotos[lightbox].label}
+                fill
+                sizes="(max-width: 768px) 94vw, 1200px"
+                style={{ objectFit: "contain" }}
+                priority
+              />
+              <button type="button" className="lightbox-close" aria-label={dict.process.close} onClick={closeLightbox}>×</button>
+              <button type="button" className="lightbox-nav lightbox-prev" aria-label={dict.process.prev} onClick={showPrev}>‹</button>
+              <button type="button" className="lightbox-nav lightbox-next" aria-label={dict.process.next} onClick={showNext}>›</button>
+            </div>
+            <div className="lightbox-caption">
+              <span className="pr-tag">{processPhotos[lightbox].tag}</span>
+              <span className="pr-label">{processPhotos[lightbox].label}</span>
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* PROJECTS */}
       <section id="projects">
@@ -327,7 +424,7 @@ export default function ClientPage({ dict }: { dict: Dictionary }) {
         <div className="proj-grid">
           <div className="pc rv">
             <div className="pc-vis">
-              <Image src="/project-exterior.jpg" alt="Exterior" fill sizes="100vw" />
+              <Image src="/trabajos/proyecto-exterior.jpg" alt="Exterior" fill sizes="100vw" />
             </div>
             <div className="pc-overlay">
               <span className="pc-tag">{dict.projects.p1_tag}</span>
@@ -338,7 +435,7 @@ export default function ClientPage({ dict }: { dict: Dictionary }) {
           
           <div className="pc rv rv1">
             <div className="pc-vis">
-              <Image src="/project-kitchen.jpg" alt="Kitchen" fill sizes="(max-width: 768px) 100vw, 50vw" />
+              <Image src="/trabajos/proyecto-cocina.jpg" alt="Kitchen" fill sizes="(max-width: 768px) 100vw, 50vw" />
             </div>
             <div className="pc-overlay">
               <span className="pc-tag">{dict.projects.p2_tag}</span>
@@ -349,7 +446,7 @@ export default function ClientPage({ dict }: { dict: Dictionary }) {
           
           <div className="pc rv rv2">
             <div className="pc-vis">
-              <Image src="/project-penthouse.jpg" alt="Penthouse" fill sizes="(max-width: 768px) 100vw, 50vw" />
+              <Image src="/trabajos/proyecto-bano.jpg" alt="Bathroom" fill sizes="(max-width: 768px) 100vw, 50vw" />
             </div>
             <div className="pc-overlay">
               <span className="pc-tag">{dict.projects.p3_tag}</span>
@@ -360,7 +457,7 @@ export default function ClientPage({ dict }: { dict: Dictionary }) {
           
           <div className="pc rv">
             <div className="pc-vis">
-              <Image src="/project-sustainable.jpg" alt="Sustainable" fill sizes="(max-width: 768px) 100vw, 50vw" />
+              <Image src="/trabajos/proyecto-interior.jpg" alt="Interior" fill sizes="(max-width: 768px) 100vw, 50vw" />
             </div>
             <div className="pc-overlay">
               <span className="pc-tag">{dict.projects.p4_tag}</span>
@@ -374,11 +471,11 @@ export default function ClientPage({ dict }: { dict: Dictionary }) {
       {/* STATS */}
       <section id="stats">
         <div>
-          <span className="st-n" data-t="340">0</span>
+          <span className="st-n" data-t="84">0</span>
           <span className="st-l">{dict.stats.s1}</span>
         </div>
         <div>
-          <span className="st-n" data-t="15">0</span>
+          <span className="st-n" data-t="5">0</span>
           <span className="st-l">{dict.stats.s2}</span>
         </div>
         <div>
@@ -411,7 +508,7 @@ export default function ClientPage({ dict }: { dict: Dictionary }) {
             <h5>{dict.footer.contact}</h5>
             <ul>
               <li><a href="tel:+14076758086">+1 (407) 675-8086</a></li>
-              <li><a href="mailto:hola@rmtsolutions.com">hola@rmtsolutions.com</a></li>
+              <li><a href="mailto:rogeliomotatorres@gmail.com">rogeliomotatorres@gmail.com</a></li>
               <li><span>{dict.footer.location}</span></li>
             </ul>
           </div>
