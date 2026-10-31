@@ -2,13 +2,10 @@
 
 import { useEffect, useRef, useCallback, useState } from "react";
 import Image from "next/image";
-import LogoMark from "./LogoMark";
 import HeroBackground from "./HeroBackground";
 import type { Dictionary } from "./dictionaries";
 
 export default function ClientPage({ dict }: { dict: Dictionary }) {
-  const cursorRef = useRef<HTMLDivElement>(null);
-  const ringRef = useRef<HTMLDivElement>(null);
   const navRef = useRef<HTMLElement>(null);
   const [menuOpen, setMenuOpen] = useState(false);
   const [lightbox, setLightbox] = useState<number | null>(null);
@@ -84,36 +81,6 @@ export default function ClientPage({ dict }: { dict: Dictionary }) {
   }, []);
 
   useEffect(() => {
-    // Custom Cursor (skip on touch devices, there is no persistent pointer to track)
-    if (window.matchMedia("(pointer: coarse)").matches) return;
-    const cur = cursorRef.current;
-    const ring = ringRef.current;
-    if (cur && ring) {
-      let rx = -100;
-      let ry = -100;
-      const onMouseMove = (e: MouseEvent) => {
-        cur.style.left = e.clientX + "px";
-        cur.style.top = e.clientY + "px";
-        rx += (e.clientX - rx) * 0.12;
-        ry += (e.clientY - ry) * 0.12;
-        ring.style.left = rx + "px";
-        ring.style.top = ry + "px";
-      };
-      document.addEventListener("mousemove", onMouseMove);
-      
-      const animRing = () => {
-        rx += (parseFloat(cur.style.left || "0") - rx) * 0.1;
-        ry += (parseFloat(cur.style.top || "0") - ry) * 0.1;
-        ring.style.left = rx + "px";
-        ring.style.top = ry + "px";
-        requestAnimationFrame(animRing);
-      };
-      requestAnimationFrame(animRing);
-      return () => document.removeEventListener("mousemove", onMouseMove);
-    }
-  }, []);
-
-  useEffect(() => {
     // Scroll effects
     const nav = navRef.current;
 
@@ -173,9 +140,6 @@ export default function ClientPage({ dict }: { dict: Dictionary }) {
 
   return (
     <>
-      <div id="cur" ref={cursorRef}></div>
-      <div id="cur-ring" ref={ringRef}></div>
-
       {/* ANIMATED BACKGROUND */}
       <div className="parallax-bg">
         <HeroBackground />
@@ -184,11 +148,8 @@ export default function ClientPage({ dict }: { dict: Dictionary }) {
       {/* NAV */}
       <nav id="nav" ref={navRef}>
         <div className="nav-inner">
-          <button type="button" className="logo" onClick={() => { window.scrollTo({ top: 0, behavior: "smooth" }); setMenuOpen(false); }}>
-            <div style={{ width: 64, height: 64, borderRadius: "50%", backgroundColor: "rgba(255,255,255,0.03)", display: "flex", alignItems: "center", justifyContent: "center", padding: "8px", border: "1px solid rgba(212,175,55,0.2)" }}>
-              <LogoMark size={48} />
-            </div>
-            RMT <span>Solutions</span>
+          <button type="button" className="logo" aria-label="RMT Solutions" onClick={() => { window.scrollTo({ top: 0, behavior: "smooth" }); setMenuOpen(false); }}>
+            <Image src="/logos/rmt-logo.png" alt="RMT Solutions" width={480} height={377} priority sizes="96px" className="nav-logo" />
           </button>
           <ul className="nav-links">
             <li><button onClick={() => goTo("about")}>{dict.nav.about}</button></li>
@@ -216,7 +177,7 @@ export default function ClientPage({ dict }: { dict: Dictionary }) {
         <button onClick={() => goTo("services")}>{dict.nav.services}</button>
         <button onClick={() => goTo("process")}>{dict.nav.process}</button>
         <button onClick={() => goTo("projects")}>{dict.nav.projects}</button>
-        <button className="btn-gold" onClick={() => goTo("contact")}>{dict.nav.cta}</button>
+        <button className="btn-primary" onClick={() => goTo("contact")}>{dict.nav.cta}</button>
       </div>
 
       {/* HERO */}
@@ -233,7 +194,7 @@ export default function ClientPage({ dict }: { dict: Dictionary }) {
             {dict.hero.sub}
           </p>
           <div className="hero-btns rv rv3">
-            <button className="btn-gold" onClick={() => goTo("contact")}>
+            <button className="btn-primary" onClick={() => goTo("contact")}>
               {dict.hero.btn1}
             </button>
             <button className="btn-outline" onClick={() => goTo("projects")}>
@@ -241,6 +202,25 @@ export default function ClientPage({ dict }: { dict: Dictionary }) {
             </button>
           </div>
         </div>
+
+        {/* Right column: finished-work photos with floating glass stat cards */}
+        <div className="hero-visual rv rv2">
+          <div className="hv-main">
+            <Image src="/trabajos/proyecto-bano.jpg" alt={dict.projects.p3_name} fill priority sizes="(max-width: 1024px) 80vw, 34vw" />
+          </div>
+          <div className="hv-sub">
+            <Image src="/trabajos/proyecto-exterior.jpg" alt={dict.projects.p1_name} fill sizes="(max-width: 1024px) 50vw, 18vw" />
+          </div>
+          <div className="hv-card hv-card-top">
+            <span className="hv-card-n">84</span>
+            <span className="hv-card-l">{dict.stats.s1}</span>
+          </div>
+          <div className="hv-card hv-card-side">
+            <span className="hv-card-n">{dict.about.badge_n}</span>
+            <span className="hv-card-l" style={{ whiteSpace: "pre-line" }}>{dict.about.badge_l}</span>
+          </div>
+        </div>
+
         <div className="scroll-ind rv rv3">
           <span className="scroll-txt">{dict.hero.scroll}</span>
           <div className="scroll-line"></div>
@@ -488,12 +468,11 @@ export default function ClientPage({ dict }: { dict: Dictionary }) {
       <footer id="contact">
         <div className="ft-grid">
           <div className="ft-brand">
-            <div className="logo">
-              <div style={{ width: 56, height: 56, borderRadius: "50%", backgroundColor: "rgba(255,255,255,0.03)", display: "flex", alignItems: "center", justifyContent: "center", padding: "6px", border: "1px solid rgba(212,175,55,0.2)" }}>
-                <LogoMark size={40} />
-              </div>
-              RMT <span>Solutions</span>
-            </div>
+            {/* Full emblem (tagline, services, phone) doubles as a business
+                card, so tapping it calls on phones */}
+            <a href="tel:+14076758086" className="ft-emblem" aria-label={`RMT Solutions — ${dict.footer.contact} +1 (407) 675-8086`}>
+              <Image src="/logos/rmt-emblema.png" alt="RMT Solutions" width={640} height={661} sizes="120px" />
+            </a>
             <p>{dict.footer.desc}</p>
           </div>
           <div className="ft-col">

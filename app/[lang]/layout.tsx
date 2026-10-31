@@ -4,7 +4,7 @@ import "../globals.css";
 import { hasLocale, type Locale } from "./dictionaries";
 
 export const viewport: Viewport = {
-  themeColor: "#080808",
+  themeColor: "#FBE6D6",
 };
 
 const inter = Inter({

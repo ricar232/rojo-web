@@ -17,6 +17,17 @@ const cspHeader = `
 `;
 
 const nextConfig: NextConfig = {
+  // A stray package-lock.json in the home directory makes Turbopack pick
+  // ~ as the workspace root and watch everything under it. Pin it here.
+  turbopack: {
+    root: __dirname,
+  },
+  // The on-disk dev cache (default since 16.1) has repeatedly restored stale
+  // CSS after the dev server restarts itself here, hiding edits until .next
+  // is wiped by hand. Cold starts are a bit slower without it.
+  experimental: {
+    turbopackFileSystemCacheForDev: false,
+  },
   async headers() {
     return [
       {
@@ -49,12 +60,12 @@ const nextConfig: NextConfig = {
         ],
       },
       {
-        // Static files served straight from /public (project photos, the
-        // sofa .glb, logos) get no cache header from Next by default, so
+        // Static files served straight from /public (project photos,
+        // logos) get no cache header from Next by default, so
         // browsers re-fetch them on every visit. Rename the file (or add a
         // ?v=2 query) when swapping one of these out, since a repeat visitor
         // won't see the change until this cache expires.
-        source: "/:path*.:ext(jpg|jpeg|png|webp|avif|svg|glb|ico)",
+        source: "/:path*.:ext(jpg|jpeg|png|webp|avif|svg|ico)",
         headers: [
           {
             key: "Cache-Control",
