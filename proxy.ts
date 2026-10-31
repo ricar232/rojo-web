@@ -36,6 +36,10 @@ export function proxy(request: NextRequest) {
 
   // Redirect if there is no locale
   const locale = getLocale(request);
+  // TEMP debug (remove): which language each browser asks for
+  if (process.env.NODE_ENV === "development") {
+    console.log(`[locale] ${request.headers.get("user-agent")?.slice(0, 60)} | accept-language="${request.headers.get("accept-language")}" -> ${locale}`);
+  }
   request.nextUrl.pathname = `/${locale}${pathname}`;
   return NextResponse.redirect(request.nextUrl);
 }
