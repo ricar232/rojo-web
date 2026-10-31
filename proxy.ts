@@ -8,16 +8,21 @@ function getLocale(request: NextRequest): string {
   const acceptLanguage = request.headers.get("accept-language");
   if (!acceptLanguage) return defaultLocale;
 
-  // Simple parser: check if 'en' appears before 'es', or just default to es.
-  // We can just check if 'en' is requested and supported.
-  if (acceptLanguage.toLowerCase().includes('en')) {
-    const enIndex = acceptLanguage.toLowerCase().indexOf('en');
-    const esIndex = acceptLanguage.toLowerCase().indexOf('es');
-    if (enIndex !== -1 && (esIndex === -1 || enIndex < esIndex)) {
-      return 'en';
-    }
-  }
-  return defaultLocale;
+  // Parse "fr-FR,fr;q=0.9,en;q=0.8" into languages ordered by their q weight
+  // (header order breaks ties), then pick the first one we support by its
+  // primary subtag, so en-GB -> en and es-MX -> es.
+  const preferred = acceptLanguage
+    .split(",")
+    .map((part, index) => {
+      const [tag, ...params] = part.trim().toLowerCase().split(";");
+      const q = params.find((p) => p.trim().startsWith("q="));
+      const weight = q ? parseFloat(q.trim().slice(2)) : 1;
+      return { lang: tag.split("-")[0], weight: Number.isNaN(weight) ? 0 : weight, index };
+    })
+    .filter((l) => l.lang && l.weight > 0)
+    .sort((a, b) => b.weight - a.weight || a.index - b.index);
+
+  return preferred.find((l) => locales.includes(l.lang))?.lang ?? defaultLocale;
 }
 
 export function proxy(request: NextRequest) {
